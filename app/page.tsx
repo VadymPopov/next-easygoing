@@ -1,32 +1,129 @@
-import * as React from "react";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Link from "@mui/material/Link";
-import NextLink from "next/link";
-import ProTip from "@/app/components/ProTip";
-import Copyright from "@/app/components/Copyright";
+import { Button } from "@nextui-org/button";
 
-export default function Home() {
+export default function Page() {
   return (
-    <Container maxWidth='lg'>
-      <Box
-        sx={{
-          my: 4,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
-        <Typography variant='h4' component='h1' sx={{ mb: 2 }}>
-          Material UI - Next.js App Router example in TypeScript
-        </Typography>
-        <Link href='/listo' color='secondary' component={NextLink}>
-          Go to the listo page
-        </Link>
-        <ProTip />
-        <Copyright />
-      </Box>
-    </Container>
+    <div>
+      <Button>Click me</Button>
+
+      <p>
+        {" "}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+        consectetur laborum, fuga error explicabo mollitia quia amet beatae, id
+        eius non expedita provident tenetur vel numquam dolorem debitis
+        corrupti? Alias magni voluptate necessitatibus eveniet exercitationem
+        quisquam in earum quae incidunt excepturi iste molestias quidem error
+        fugiat nemo cum esse, delectus, vero inventore minima velit? Consequatur
+        sit impedit modi. Exercitationem harum amet illum repellat rerum, eius
+        quasi hic unde, molestias earum enim possimus excepturi tempore, sequi
+        totam fuga! Fugiat itaque quia repudiandae vel quod mollitia dolores ad
+        fugit unde velit dolorem laborum beatae perferendis, id explicabo modi
+        eum. Rem, culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Assumenda consectetur laborum, fuga error explicabo mollitia quia
+        amet beatae, id eius non expedita provident tenetur vel numquam dolorem
+        debitis corrupti? Alias magni voluptate necessitatibus eveniet
+        exercitationem quisquam in earum quae incidunt excepturi iste molestias
+        quidem error fugiat nemo cum esse, delectus, vero inventore minima
+        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
+        repellat rerum, eius quasi hic unde, molestias earum enim possimus
+        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
+        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
+        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
+        fuga error explicabo mollitia quia amet beatae, id eius non expedita
+        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
+        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
+        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
+        delectus, vero inventore minima velit? Consequatur sit impedit modi.
+        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
+        molestias earum enim possimus excepturi tempore, sequi totam fuga!
+        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
+        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
+        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
+        beatae, id eius non expedita provident tenetur vel numquam dolorem
+        debitis corrupti? Alias magni voluptate necessitatibus eveniet
+        exercitationem quisquam in earum quae incidunt excepturi iste molestias
+        quidem error fugiat nemo cum esse, delectus, vero inventore minima
+        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
+        repellat rerum, eius quasi hic unde, molestias earum enim possimus
+        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
+        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
+        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
+        fuga error explicabo mollitia quia amet beatae, id eius non expedita
+        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
+        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
+        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
+        delectus, vero inventore minima velit? Consequatur sit impedit modi.
+        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
+        molestias earum enim possimus excepturi tempore, sequi totam fuga!
+        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
+        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
+        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
+        beatae, id eius non expedita provident tenetur vel numquam dolorem
+        debitis corrupti? Alias magni voluptate necessitatibus eveniet
+        exercitationem quisquam in earum quae incidunt excepturi iste molestias
+        quidem error fugiat nemo cum esse, delectus, vero inventore minima
+        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
+        repellat rerum, eius quasi hic unde, molestias earum enim possimus
+        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
+        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
+        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
+        fuga error explicabo mollitia quia amet beatae, id eius non expedita
+        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
+        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
+        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
+        delectus, vero inventore minima velit? Consequatur sit impedit modi.
+        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
+        molestias earum enim possimus excepturi tempore, sequi totam fuga!
+        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
+        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
+        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
+        beatae, id eius non expedita provident tenetur vel numquam dolorem
+        debitis corrupti? Alias magni voluptate necessitatibus eveniet
+        exercitationem quisquam in earum quae incidunt excepturi iste molestias
+        quidem error fugiat nemo cum esse, delectus, vero inventore minima
+        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
+        repellat rerum, eius quasi hic unde, molestias earum enim possimus
+        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
+        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
+        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
+        fuga error explicabo mollitia quia amet beatae, id eius non expedita
+        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
+        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
+        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
+        delectus, vero inventore minima velit? Consequatur sit impedit modi.
+        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
+        molestias earum enim possimus excepturi tempore, sequi totam fuga!
+        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
+        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
+        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
+        beatae, id eius non expedita provident tenetur vel numquam dolorem
+        debitis corrupti? Alias magni voluptate necessitatibus eveniet
+        exercitationem quisquam in earum quae incidunt excepturi iste molestias
+        quidem error fugiat nemo cum esse, delectus, vero inventore minima
+        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
+        repellat rerum, eius quasi hic unde, molestias earum enim possimus
+        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
+        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
+        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
+        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
+        fuga error explicabo mollitia quia amet beatae, id eius non expedita
+        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
+        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
+        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
+        delectus, vero inventore minima velit? Consequatur sit impedit modi.
+        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
+        molestias earum enim possimus excepturi tempore, sequi totam fuga!
+        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
+        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
+        culpa? Ad?
+      </p>
+    </div>
   );
 }
