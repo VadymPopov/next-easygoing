@@ -18,7 +18,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <AppBar />
-          <main>{children}</main>
+          <main className='mx-10'>{children}</main>
         </Providers>
       </body>
     </html>

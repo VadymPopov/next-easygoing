@@ -2,7 +2,7 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
-import { IoMoon, IoSunny } from "react-icons/io5";
+import { GiPill } from "react-icons/gi";
 
 export default function ThemeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
@@ -24,9 +24,8 @@ export default function ThemeSwitcher() {
         }}
         variant='light'
         radius='full'
-        size='sm'
-        color='primary'>
-        <IoMoon color='primary' size={20} />
+        size='sm'>
+        <GiPill color='red' size={30} />
       </Button>
     );
   }
@@ -38,9 +37,8 @@ export default function ThemeSwitcher() {
         }}
         variant='light'
         radius='full'
-        size='sm'
-        color='primary'>
-        <IoSunny color='primary' size={20} />
+        size='sm'>
+        <GiPill color='blue' size={30} />
       </Button>
     );
   }

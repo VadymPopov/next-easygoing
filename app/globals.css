@@ -1,3 +1,83 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    position: relative;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: transparent;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: sans-serif;
+    box-sizing: border-box;
+    border-radius: 30px;
+    z-index: 1;
+    transform: rotate(-90deg);
+    animation: jump 2s infinite ease-in-out 1s;
+  }
+
+  .blue {
+    background: linear-gradient(to right, #2563eb 50%, #1e40af 50%);
+  }
+
+  .red {
+    background: linear-gradient(to right, #dc2626 50%, #991b1b 50%);
+  }
+
+  .btn:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes animate {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+
+  .btn:before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    z-index: -1;
+    background: linear-gradient(
+      90deg,
+      #03a9f4,
+      #f441a5,
+      #ffeb3b,
+      #f441a5,
+      #03a9f4
+    );
+    background-size: 200%;
+    border-radius: 20px;
+    opacity: 0;
+    transition: 1s;
+  }
+
+  .btn:hover:before {
+    filter: blur(16px);
+    opacity: 1;
+    animation: animate 2s linear infinite;
+  }
+
+  @keyframes jump {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-90deg);
+    }
+    50% {
+      transform: translateY(-40%) rotate(-90deg);
+    }
+  }
+}

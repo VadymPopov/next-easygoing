@@ -1,129 +1,29 @@
-import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 export default function Page() {
   return (
-    <div>
-      <Button>Click me</Button>
-
-      <p>
-        {" "}
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-        consectetur laborum, fuga error explicabo mollitia quia amet beatae, id
-        eius non expedita provident tenetur vel numquam dolorem debitis
-        corrupti? Alias magni voluptate necessitatibus eveniet exercitationem
-        quisquam in earum quae incidunt excepturi iste molestias quidem error
-        fugiat nemo cum esse, delectus, vero inventore minima velit? Consequatur
-        sit impedit modi. Exercitationem harum amet illum repellat rerum, eius
-        quasi hic unde, molestias earum enim possimus excepturi tempore, sequi
-        totam fuga! Fugiat itaque quia repudiandae vel quod mollitia dolores ad
-        fugit unde velit dolorem laborum beatae perferendis, id explicabo modi
-        eum. Rem, culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing
-        elit. Assumenda consectetur laborum, fuga error explicabo mollitia quia
-        amet beatae, id eius non expedita provident tenetur vel numquam dolorem
-        debitis corrupti? Alias magni voluptate necessitatibus eveniet
-        exercitationem quisquam in earum quae incidunt excepturi iste molestias
-        quidem error fugiat nemo cum esse, delectus, vero inventore minima
-        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
-        repellat rerum, eius quasi hic unde, molestias earum enim possimus
-        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
-        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
-        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
-        fuga error explicabo mollitia quia amet beatae, id eius non expedita
-        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
-        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
-        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
-        delectus, vero inventore minima velit? Consequatur sit impedit modi.
-        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
-        molestias earum enim possimus excepturi tempore, sequi totam fuga!
-        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
-        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
-        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
-        beatae, id eius non expedita provident tenetur vel numquam dolorem
-        debitis corrupti? Alias magni voluptate necessitatibus eveniet
-        exercitationem quisquam in earum quae incidunt excepturi iste molestias
-        quidem error fugiat nemo cum esse, delectus, vero inventore minima
-        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
-        repellat rerum, eius quasi hic unde, molestias earum enim possimus
-        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
-        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
-        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
-        fuga error explicabo mollitia quia amet beatae, id eius non expedita
-        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
-        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
-        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
-        delectus, vero inventore minima velit? Consequatur sit impedit modi.
-        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
-        molestias earum enim possimus excepturi tempore, sequi totam fuga!
-        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
-        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
-        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
-        beatae, id eius non expedita provident tenetur vel numquam dolorem
-        debitis corrupti? Alias magni voluptate necessitatibus eveniet
-        exercitationem quisquam in earum quae incidunt excepturi iste molestias
-        quidem error fugiat nemo cum esse, delectus, vero inventore minima
-        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
-        repellat rerum, eius quasi hic unde, molestias earum enim possimus
-        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
-        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
-        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
-        fuga error explicabo mollitia quia amet beatae, id eius non expedita
-        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
-        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
-        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
-        delectus, vero inventore minima velit? Consequatur sit impedit modi.
-        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
-        molestias earum enim possimus excepturi tempore, sequi totam fuga!
-        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
-        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
-        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
-        beatae, id eius non expedita provident tenetur vel numquam dolorem
-        debitis corrupti? Alias magni voluptate necessitatibus eveniet
-        exercitationem quisquam in earum quae incidunt excepturi iste molestias
-        quidem error fugiat nemo cum esse, delectus, vero inventore minima
-        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
-        repellat rerum, eius quasi hic unde, molestias earum enim possimus
-        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
-        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
-        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
-        fuga error explicabo mollitia quia amet beatae, id eius non expedita
-        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
-        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
-        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
-        delectus, vero inventore minima velit? Consequatur sit impedit modi.
-        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
-        molestias earum enim possimus excepturi tempore, sequi totam fuga!
-        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
-        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
-        culpa? Ad? Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Assumenda consectetur laborum, fuga error explicabo mollitia quia amet
-        beatae, id eius non expedita provident tenetur vel numquam dolorem
-        debitis corrupti? Alias magni voluptate necessitatibus eveniet
-        exercitationem quisquam in earum quae incidunt excepturi iste molestias
-        quidem error fugiat nemo cum esse, delectus, vero inventore minima
-        velit? Consequatur sit impedit modi. Exercitationem harum amet illum
-        repellat rerum, eius quasi hic unde, molestias earum enim possimus
-        excepturi tempore, sequi totam fuga! Fugiat itaque quia repudiandae vel
-        quod mollitia dolores ad fugit unde velit dolorem laborum beatae
-        perferendis, id explicabo modi eum. Rem, culpa? Ad? Lorem ipsum dolor
-        sit amet consectetur adipisicing elit. Assumenda consectetur laborum,
-        fuga error explicabo mollitia quia amet beatae, id eius non expedita
-        provident tenetur vel numquam dolorem debitis corrupti? Alias magni
-        voluptate necessitatibus eveniet exercitationem quisquam in earum quae
-        incidunt excepturi iste molestias quidem error fugiat nemo cum esse,
-        delectus, vero inventore minima velit? Consequatur sit impedit modi.
-        Exercitationem harum amet illum repellat rerum, eius quasi hic unde,
-        molestias earum enim possimus excepturi tempore, sequi totam fuga!
-        Fugiat itaque quia repudiandae vel quod mollitia dolores ad fugit unde
-        velit dolorem laborum beatae perferendis, id explicabo modi eum. Rem,
-        culpa? Ad?
-      </p>
+    <div className='flex flex-col items-center justify-center h-screen gap-10'>
+      <div className='text-center'>
+        <h1 className='bg-gradient-to-r from-red-700 via-purple-500 to-blue-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl mb-6'>
+          Choose wisely
+        </h1>
+        <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 text-gray-500 mb-6 lg:text-center xl:px-56 lg:px-40 md:px-20'>
+          “You take the{" "}
+          <span className='text-blue-600 font-semibold'>blue pill</span>, the
+          story ends, you wake up in your bed and believe whatever you want to
+          believe. You take the{" "}
+          <span className='text-red-600 font-semibold'>red pill</span>, you stay
+          in wonderland, and I show you how deep the rabbit hole goes.”
+        </p>
+      </div>
+      <div>
+        <Link href='' className='btn red'>
+          Click me
+        </Link>
+        <Link href='' className='btn blue'>
+          Click me
+        </Link>
+      </div>
     </div>
   );
 }
