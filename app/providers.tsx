@@ -1,13 +1,26 @@
 "use client";
-
+import { useRef } from "react";
+import { Provider } from "react-redux";
+import { makeStore, AppStore } from "../lib/store";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider } from "next-themes";
+import { PersistGate } from "redux-persist/integration/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
+  const storeRef = useRef<AppStore>();
+  if (!storeRef.current) {
+    // Create the store instance the first time this renders
+    storeRef.current = makeStore();
+  }
+
   return (
     <NextUIProvider>
       <ThemeProvider attribute='class' defaultTheme='dark' enableSystem>
-        {children}
+        <Provider store={storeRef.current}>
+          <PersistGate loading={null} persistor={storeRef.current.__persistor}>
+            {children}
+          </PersistGate>
+        </Provider>
       </ThemeProvider>
     </NextUIProvider>
   );

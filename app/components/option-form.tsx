@@ -2,19 +2,24 @@
 import { useState } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { GiPill } from "react-icons/gi";
+import { useAppDispatch } from "@/lib/hooks";
+import { addOption } from "@/lib/optionsSlice";
 
 export function OptionForm() {
   const [value, setValue] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     if (form.elements.text.value === "") {
-      setIsInvalid(true);
+      return setIsInvalid(true);
     } else {
       setIsInvalid(false);
     }
+
+    dispatch(addOption(form.elements.text.value));
     form.reset();
   };
 
@@ -33,6 +38,7 @@ export function OptionForm() {
         isInvalid={isInvalid}
         errorMessage={isInvalid && "That's not serious, write something"}
         onValueChange={setValue}
+        value={value}
       />
       <Button
         type='submit'
@@ -40,7 +46,7 @@ export function OptionForm() {
         size='md'
         variant='ghost'
         color='primary'
-        isLoading
+        // isLoading
         spinner={<GiPill className='animate-spin h-10 w-10 text-current' />}>
         Add task
       </Button>
