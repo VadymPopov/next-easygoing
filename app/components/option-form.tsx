@@ -1,14 +1,16 @@
 "use client";
 import { useState } from "react";
 import { Button, Input } from "@nextui-org/react";
-import { GiPill } from "react-icons/gi";
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addOption } from "@/lib/optionsSlice";
+import { deleteIdx } from "@/lib/randomSlice";
+import { getRandomIdx } from "@/lib/selectors";
 
 export function OptionForm() {
   const [value, setValue] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const dispatch = useAppDispatch();
+  const randomIndex = useAppSelector(getRandomIdx);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,6 +19,10 @@ export function OptionForm() {
       return setIsInvalid(true);
     } else {
       setIsInvalid(false);
+    }
+
+    if (randomIndex !== null) {
+      dispatch(deleteIdx());
     }
 
     dispatch(addOption(form.elements.text.value));
@@ -45,9 +51,7 @@ export function OptionForm() {
         radius='full'
         size='md'
         variant='ghost'
-        color='primary'
-        // isLoading
-        spinner={<GiPill className='animate-spin h-10 w-10 text-current' />}>
+        color='primary'>
         Add task
       </Button>
     </form>

@@ -1,14 +1,22 @@
 "use client";
 import { MdClose } from "react-icons/md";
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { deleteOption } from "@/lib/optionsSlice";
 import { OptionsType } from "./option-list";
 import { FaTrash } from "react-icons/fa";
+import { deleteIdx } from "@/lib/randomSlice";
+import { getRandomIdx } from "@/lib/selectors";
 
 export function Option({ option, idx }: { option: OptionsType; idx: number }) {
   const dispatch = useAppDispatch();
+  const randomIndex = useAppSelector(getRandomIdx);
 
-  const handleDelete = () => dispatch(deleteOption(option.id));
+  const handleDelete = () => {
+    if (randomIndex !== null) {
+      dispatch(deleteIdx());
+    }
+    dispatch(deleteOption(option.id));
+  };
 
   return (
     <div className='flex items-center justify-between'>

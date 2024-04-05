@@ -1,24 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { optionsReducer } from "./optionsSlice";
+import { randomReducer } from "./randomSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "options",
+  key: "persistedStore",
   storage: storage,
 };
 
 const rootReducer = combineReducers({
   options: optionsReducer,
+  random: randomReducer,
 });
-
-// export const makeStore = () => {
-//   return configureStore({
-//     reducer: {
-//       options: optionsReducer,
-//     },
-//   });
-// };
 
 const makeConfiguredStore = () =>
   configureStore({
