@@ -3,7 +3,6 @@ import Steps from "@/app/components/steps";
 import { OptionForm } from "@/app/components/option-form";
 import { OptionList } from "@/app/components/option-list";
 import { IoFootsteps } from "react-icons/io5";
-
 export const metadata: Metadata = {
   title: "Listo",
 };

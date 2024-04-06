@@ -4,7 +4,7 @@ export default function Page() {
   return (
     <div className='flex flex-col items-center justify-center h-screen gap-10'>
       <div className='text-center'>
-        <h1 className='bg-gradient-to-r from-red-700 via-purple-500 to-blue-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl mb-6'>
+        <h1 className='gradient-animation bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl mb-6'>
           Choose wisely
         </h1>
         <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 text-gray-500 mb-6 lg:text-center xl:px-56 lg:px-40 md:px-20'>

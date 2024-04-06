@@ -80,4 +80,72 @@
       transform: translateY(-40%) rotate(-90deg);
     }
   }
+
+  @keyframes animateGradient {
+    0% {
+      background-position: 0% 0%;
+    }
+    20% {
+      background-position: 25% 25%;
+    }
+    40% {
+      background-position: 50% 50%;
+    }
+    60% {
+      background-position: 0 100%;
+    }
+    80% {
+      background-position: 50% 75%;
+    }
+    100% {
+      background-position: 100% 25%;
+    }
+  }
+
+  .gradient-animation {
+    animation: animateGradient 10s ease infinite;
+    background-image: linear-gradient(
+      to left,
+      #ff00ff,
+      #ff00ff,
+      #ff00ff,
+      #ff0000,
+      #ff0000,
+      #ff0000,
+      #0000ff,
+      #0000ff,
+      #0000ff,
+      #ff00ff,
+      #ff00ff,
+      #ff00ff,
+      #ff0000,
+      #ff0000,
+      #ff0000,
+      #ff00ff,
+      #ff00ff,
+      #ff00ff
+    );
+    background-size: 400% 400%;
+  }
+
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    transform-origin: center bottom;
+    animation: fall 4s linear infinite;
+  }
+
+  .confetti.square {
+    clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%);
+  }
+  .confetti.triangle {
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(100vh) rotate(720deg);
+    }
+  }
 }

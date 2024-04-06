@@ -5,6 +5,7 @@ import { makeStore, AppStore } from "../lib/store";
 import { NextUIProvider } from "@nextui-org/react";
 import { ThemeProvider } from "next-themes";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster } from "react-hot-toast";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const storeRef = useRef<AppStore>();
@@ -22,6 +23,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           </PersistGate>
         </Provider>
       </ThemeProvider>
+      <Toaster />
     </NextUIProvider>
   );
 }
