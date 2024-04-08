@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addOption } from "@/lib/optionsSlice";
@@ -12,10 +12,11 @@ export function OptionForm() {
   const dispatch = useAppDispatch();
   const randomIndex = useAppSelector(getRandomIdx);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target;
-    if (form.elements.text.value === "") {
+    const form = event.target as HTMLFormElement;
+    const text = form.elements.namedItem("text") as HTMLInputElement;
+    if (!text.value) {
       return setIsInvalid(true);
     } else {
       setIsInvalid(false);
@@ -25,7 +26,7 @@ export function OptionForm() {
       dispatch(deleteIdx());
     }
 
-    dispatch(addOption(form.elements.text.value));
+    dispatch(addOption(text.value));
     form.reset();
   };
 

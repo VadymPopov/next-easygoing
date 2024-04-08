@@ -17,10 +17,10 @@ export default function Page() {
         </p>
       </div>
       <div>
-        <Link href='' className='btn red'>
+        <Link href='/listo' className='btn red'>
           Click me
         </Link>
-        <Link href='' className='btn blue'>
+        <Link href='/blue-pill' className='btn blue'>
           Click me
         </Link>
       </div>

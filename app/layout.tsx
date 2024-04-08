@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
-import AppBar from "@/app/components/navbar";
 
 export const metadata: Metadata = {
   title: "Easygoing",
@@ -17,7 +16,6 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body>
         <Providers>
-          <AppBar />
           <main className='mx-10'>{children}</main>
         </Providers>
       </body>

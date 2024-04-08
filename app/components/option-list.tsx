@@ -61,6 +61,7 @@ export function OptionList() {
         5000
       );
       showToastWithDelay("Dont upset me anymore", 2000, 3500);
+      showToastWithDelay("I am watching you", 2200, 3200);
       return;
     }
     const generatedIdx = getRandomNumber(options.length) - 1;
