@@ -3,14 +3,14 @@ import { ChangeEvent, useState } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addOption } from "@/lib/optionsSlice";
-import { deleteIdx } from "@/lib/randomSlice";
-import { getRandomIdx } from "@/lib/selectors";
+import { deleteIdx, toggleIsDisabled } from "@/lib/randomSlice";
+import { selectRandomIdx } from "@/lib/selectors";
 
 export function OptionForm() {
   const [value, setValue] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
   const dispatch = useAppDispatch();
-  const randomIndex = useAppSelector(getRandomIdx);
+  const randomIndex = useAppSelector(selectRandomIdx);
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,6 +24,7 @@ export function OptionForm() {
 
     if (randomIndex !== null) {
       dispatch(deleteIdx());
+      dispatch(toggleIsDisabled(false));
     }
 
     dispatch(addOption(text.value));

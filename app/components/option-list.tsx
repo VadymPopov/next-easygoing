@@ -1,11 +1,15 @@
 "use client";
 import { Option } from "./option";
-import { getOptions, getRandomIdx } from "@/lib/selectors";
+import {
+  selectIsDisabled,
+  selectOptions,
+  selectRandomIdx,
+} from "@/lib/selectors";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { Button, Link } from "@nextui-org/react";
 import { GiPill } from "react-icons/gi";
 import { getRandomNumber } from "@/helpers/random";
-import { addIdx } from "@/lib/randomSlice";
+import { addIdx, toggleIsDisabled } from "@/lib/randomSlice";
 import MatrixDigitalRain from "@/app/components/matrix-rain";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -18,8 +22,9 @@ export type OptionsType = {
 export function OptionList() {
   const [shouldUnmount, setShouldUnmount] = useState(false);
   const dispatch = useAppDispatch();
-  const options = useAppSelector(getOptions);
-  const randomIndex = useAppSelector(getRandomIdx);
+  const options = useAppSelector(selectOptions);
+  const randomIndex = useAppSelector(selectRandomIdx);
+  const isDisabled = useAppSelector(selectIsDisabled);
 
   useEffect(() => {
     if (shouldUnmount) {
@@ -62,6 +67,7 @@ export function OptionList() {
       );
       showToastWithDelay("Dont upset me anymore", 2000, 3500);
       showToastWithDelay("I am watching you", 2200, 3200);
+      dispatch(toggleIsDisabled(true));
       return;
     }
     const generatedIdx = getRandomNumber(options.length) - 1;
@@ -89,6 +95,7 @@ export function OptionList() {
           size='lg'
           variant='ghost'
           className='text-lg flex items-center justify-center m-auto gap-4 mb-6 font-semibold'
+          isDisabled={isDisabled}
           onClick={handleBtnClick}>
           Ask the Oracle{" "}
           <GiPill className='animate-spin h-10 w-10 text-current' />

@@ -3,7 +3,7 @@ import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addNumber, deleteNumber } from "@/lib/randomSlice";
-import { getRandomNumber } from "@/lib/selectors";
+import { selectRandomNumber } from "@/lib/selectors";
 import toast from "react-hot-toast";
 import { getRandomIntInclusive } from "@/helpers/random";
 import MatrixDigitalRain from "./matrix-rain";
@@ -15,7 +15,7 @@ export function NumberForm() {
   const [shouldUnmount, setShouldUnmount] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const dispatch = useAppDispatch();
-  const randomNumber = useAppSelector(getRandomNumber);
+  const randomNumber = useAppSelector(selectRandomNumber);
 
   const showToastWithDelay = (
     message: string,
@@ -93,7 +93,11 @@ export function NumberForm() {
     } else {
       setMaxValue(value);
     }
-    dispatch(deleteNumber());
+
+    if (randomNumber) {
+      dispatch(deleteNumber());
+    }
+
     setIsDisabled(false);
   };
 

@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { optionsReducer } from "./optionsSlice";
 import { randomReducer } from "./randomSlice";
+import { moviesReducer } from "./moviesSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -12,6 +13,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   options: optionsReducer,
   random: randomReducer,
+  movies: moviesReducer,
 });
 
 const makeConfiguredStore = () =>
