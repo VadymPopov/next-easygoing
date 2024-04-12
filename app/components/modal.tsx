@@ -6,68 +6,166 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Image,
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { selectMovie, selectMovieDetails } from "@/lib/selectors";
+import {
+  selectMovie,
+  selectMovieDetails,
+  selectTrailerKey,
+} from "@/lib/selectors";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { fetchMovieDetailsById } from "@/lib/operations";
+import { fetchMovieDetailsById, getMovieTrailerById } from "@/lib/operations";
 
 export default function MovieModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const dispatch = useAppDispatch();
   const movie = useAppSelector(selectMovie);
+  const trailerKey = useAppSelector(selectTrailerKey);
   const movieDetails = useAppSelector(selectMovieDetails);
-  console.log(movie.id);
-  console.log(movieDetails);
+
+  const {
+    backdrop_path,
+    genres,
+    overview,
+    poster_path,
+    release_date,
+    tagline,
+    vote_average,
+    vote_count,
+    production_countries,
+    runtime,
+    title,
+  } = movieDetails;
 
   useEffect(() => {
-    if (movie.id) {
+    if (movie && movie.id) {
       dispatch(fetchMovieDetailsById(movie.id));
+      dispatch(getMovieTrailerById(movie.id));
     }
-  }, [dispatch, movie.id]);
+  }, [dispatch, movie]);
+
+  const handleBtnClick = () => {
+    window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
+  };
 
   return (
     <>
-      <Button onPress={onOpen}>Open Modal</Button>
+      <Button
+        variant='flat'
+        color='default'
+        radius='lg'
+        size='sm'
+        className='text-tiny text-white bg-black/20'
+        onPress={onOpen}>
+        Details
+      </Button>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         size='4xl'
-        backdrop='blur'>
+        backdrop='blur'
+        shouldBlockScroll={true}
+        scrollBehavior='outside'>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className='flex flex-col gap-1'>
-                Modal Title
-              </ModalHeader>
-              <ModalBody>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+              <ModalHeader className='flex flex-col gap-1'></ModalHeader>
+              <ModalBody className='sm:grid sm:grid-cols-2 md:grid-cols-3 gap-6 justify-center'>
+                <Image
+                  alt={title || "movie cover"}
+                  className='object-contain md:col-span-1 w-fit'
+                  src={
+                    poster_path || backdrop_path
+                      ? `https://image.tmdb.org/t/p/w500/${
+                          poster_path || backdrop_path
+                        }`
+                      : "/fallback-img-two.jpg"
+                  }
+                  removeWrapper={true}
+                />
+                <div className='md:col-span-2'>
+                  {title && (
+                    <h2 className='mb-4 font-bold text-3xl'>{title}</h2>
+                  )}
+                  {tagline && <p className='mb-4'>&quot;{tagline}&quot;</p>}
+
+                  <table className='mb-4'>
+                    <tbody>
+                      {vote_average !== 0 && (
+                        <tr>
+                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                            Rating
+                          </td>
+                          <td>
+                            <span className='px-2 py-1 text-white bg-orange-500 rounded-xl'>
+                              {vote_average}
+                            </span>
+                            <span> / </span>
+                            <span>{vote_count}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {genres.length > 0 && (
+                        <tr>
+                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                            Genre
+                          </td>
+                          <td>
+                            {genres.map((genre) => genre.name).join(", ")}
+                          </td>
+                        </tr>
+                      )}
+                      {release_date && (
+                        <tr>
+                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                            Release Date
+                          </td>
+                          <td>{release_date}</td>
+                        </tr>
+                      )}
+                      {runtime !== 0 && (
+                        <tr>
+                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                            Time
+                          </td>
+                          <td>{runtime} min</td>
+                        </tr>
+                      )}
+
+                      {production_countries.length > 0 && (
+                        <tr>
+                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                            Country
+                          </td>
+                          <td>
+                            {production_countries
+                              .map((country) => country.iso_3166_1)
+                              .join(", ")}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                  {overview && (
+                    <>
+                      <h3 className='text-lg'>About</h3>
+                      <p className='text-justify'>{overview}</p>
+                    </>
+                  )}
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color='danger' variant='light' onPress={onClose}>
                   Close
                 </Button>
-                <Button color='primary' onPress={onClose}>
-                  Action
-                </Button>
+                {trailerKey && (
+                  <Button color='primary' onPress={handleBtnClick}>
+                    Watch Trailer
+                  </Button>
+                )}
               </ModalFooter>
             </>
           )}

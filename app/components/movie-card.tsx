@@ -1,13 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import {
-  Card,
-  CardFooter,
-  CardHeader,
-  Image,
-  Button,
-  CardBody,
-} from "@nextui-org/react";
+import { Card, CardFooter, Image, CardBody } from "@nextui-org/react";
 import MovieModal from "./modal";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { fetchInitialMovie, fetchMoviesByGenreAndYear } from "@/lib/operations";
@@ -25,7 +18,7 @@ export default function MovieCard() {
   const movie = useAppSelector(selectMovie);
   const randomPage = useAppSelector(selectRandomPage);
 
-  const { title, vote_average, overview, poster_path, id } = movie || {};
+  const { title, poster_path } = movie || {};
 
   useEffect(() => {
     if (randomPage && year) {
@@ -46,34 +39,24 @@ export default function MovieCard() {
 
   return (
     <>
-      <Card isFooterBlurred radius='lg' className='border-none'>
-        <CardHeader className='pb-0 pt-2 px-4 flex-col items-start'>
-          <p className='text-tiny uppercase font-bold'>Daily Mix</p>
-          <small className='text-default-500'>12 Tracks</small>
-          <h4 className='font-bold text-large'>{overview}</h4>
-        </CardHeader>
-        <CardBody className='overflow-visible py-2'>
+      <Card isFooterBlurred radius='lg' className='border-none max-w-96 m-auto'>
+        <CardBody className='overflow-visible p-0'>
           <Image
-            alt='Woman listing to music'
-            className='object-cover'
-            height={600}
-            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            width={200}
+            alt={title}
+            className='object-cover max-w-96'
+            src={
+              poster_path
+                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                : "/fallback-img.jpg"
+            }
+            isZoomed
           />
         </CardBody>
         <CardFooter className='justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10'>
-          <p className='text-tiny text-white/80'>{title}</p>
-          <Button
-            className='text-tiny text-white bg-black/20'
-            variant='flat'
-            color='default'
-            radius='lg'
-            size='sm'>
-            {vote_average}
-          </Button>
+          <p className='text-tiny text-white/80 uppercase'>{title}</p>
+          <MovieModal />
         </CardFooter>
       </Card>
-      <MovieModal />
     </>
   );
 }

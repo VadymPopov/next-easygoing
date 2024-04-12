@@ -42,8 +42,6 @@ export default function MovieForm() {
   const [isDisabled, setIsDisabled] = useState(false);
   const dispatch = useAppDispatch();
 
-  console.log(totalPages);
-
   useEffect(() => {
     if (generesArray.length <= 0) {
       dispatch(getGenres());

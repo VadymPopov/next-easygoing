@@ -67,6 +67,20 @@ export const fetchMovieDetailsById = createAsyncThunk(
   }
 );
 
+export const getMovieTrailerById = createAsyncThunk(
+  "movies/movieTrailerById",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axiosInstance.get(
+        `/movie/${id}/videos?language=en-US`
+      );
+      return response.data.results;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 export const fetchTotalPagesByGenreAndYear = createAsyncThunk(
   "movies/totalPagesByGenreAndYear",
   async ({ genres, year }, thunkAPI) => {

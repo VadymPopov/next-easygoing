@@ -12,3 +12,4 @@ export const selectTotalPages = (state: RootState) => state.movies.totalPages;
 export const selectYear = (state: RootState) => state.movies.selectedYear;
 export const selectGenres = (state: RootState) => state.movies.selectedGenres;
 export const selectRandomPage = (state: RootState) => state.movies.randomPage;
+export const selectTrailerKey = (state: RootState) => state.movies.trailerKey;
