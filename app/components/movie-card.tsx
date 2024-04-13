@@ -3,15 +3,21 @@ import React, { useEffect } from "react";
 import { Card, CardFooter, Image, CardBody } from "@nextui-org/react";
 import MovieModal from "./modal";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { fetchInitialMovie, fetchMoviesByGenreAndYear } from "@/lib/operations";
+import {
+  fetchInitialMovie,
+  fetchMoviesByGenreAndYear,
+  fetchTopRatedMovies,
+} from "@/lib/operations";
 import {
   selectGenres,
   selectMovie,
   selectRandomPage,
   selectYear,
 } from "@/lib/selectors";
+import { updateRandomPage } from "@/lib/moviesSlice";
+import { getRandomNumber } from "@/helpers/random";
 
-export default function MovieCard() {
+export default function MovieCard({ type }: { type: string }) {
   const dispatch = useAppDispatch();
   const year = useAppSelector(selectYear);
   const genres = useAppSelector(selectGenres);
@@ -21,7 +27,7 @@ export default function MovieCard() {
   const { title, poster_path } = movie || {};
 
   useEffect(() => {
-    if (randomPage && year) {
+    if (randomPage && year && type === "oracle") {
       const data: { genres: string; year: string; page: string } = {
         genres: genres,
         year: year,
@@ -29,7 +35,13 @@ export default function MovieCard() {
       };
       dispatch(fetchMoviesByGenreAndYear(data));
     }
-  }, [dispatch, genres, randomPage, year]);
+  }, [dispatch, genres, randomPage, type, year]);
+
+  useEffect(() => {
+    if (type === "top-rated") {
+      dispatch(fetchTopRatedMovies(randomPage));
+    }
+  }, [dispatch, randomPage, type]);
 
   useEffect(() => {
     if (movie && Object.keys(movie).length === 0) {

@@ -1,12 +1,10 @@
 import { Metadata } from "next";
-import MovieForm from "@/app/components/movie-form";
-import MovieCard from "@/app/components/movie-card";
-
+import MovieNavbar from "@/app/components/movie-navbar";
 export const metadata: Metadata = {
   title: "Netflix&Chill",
 };
 
-export default function Page() {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <div className='text-center mb-6 '>
@@ -14,12 +12,12 @@ export default function Page() {
           The name speaks by itself
         </h1>
         <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 text-gray-500  lg:text-center xl:px-56 lg:px-40 md:px-20'>
-          Classic back-and-forth of &quot;What should we watch?&quot; &quot;I
-          don&apos;t know, what do you want?&quot;.
+          Classic back-and-forth of &quot;What should we watch tonight?&quot;
+          &quot;I don&apos;t know, what do you want?&quot;.
         </p>
       </div>
-      <MovieForm />
-      <MovieCard />
+      <MovieNavbar />
+      <div>{children}</div>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import { getRandomNumber } from "@/helpers/random";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -46,6 +47,19 @@ export const fetchMoviesByGenreAndYear = createAsyncThunk(
     const queryStr = genres
       ? `/discover/movie?with_genres=${genres}&year=${year}&page=${page}&language=en-US`
       : `/discover/movie?year=${year}&page=${page}&language=en-US`;
+    try {
+      const response = await axiosInstance.get(queryStr);
+      return response.data.results;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchTopRatedMovies = createAsyncThunk(
+  "movies/topRatedMovies",
+  async (randomPage, thunkAPI) => {
+    const queryStr = `/movie/top_rated?&page=${randomPage}&language=en-US`;
     try {
       const response = await axiosInstance.get(queryStr);
       return response.data.results;

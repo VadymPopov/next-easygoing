@@ -7,6 +7,7 @@ import {
   fetchTotalPagesByGenreAndYear,
   fetchMovieDetailsById,
   getMovieTrailerById,
+  fetchTopRatedMovies,
 } from "./operations";
 
 const initialYear = new Date().getFullYear().toString();
@@ -28,7 +29,7 @@ const moviesSlice = createSlice({
     movieDetails: {},
     trailerKey: "",
     totalPages: null,
-    randomPage: 0,
+    randomPage: 1,
     genres: [],
     selectedGenres: "",
     selectedYear: initialYear,
@@ -96,7 +97,16 @@ const moviesSlice = createSlice({
         state.error = null;
         state.trailerKey = trailer && trailer.key;
       })
-      .addCase(getMovieTrailerById.rejected, handleRejected);
+      .addCase(getMovieTrailerById.rejected, handleRejected)
+      .addCase(fetchTopRatedMovies.pending, handlePending)
+      .addCase(fetchTopRatedMovies.fulfilled, (state, action) => {
+        const randomIdx = getRandomNumber(20);
+        state.isLoading = false;
+        state.error = null;
+        // state.moviesArray = action.payload;
+        state.movie = action.payload[randomIdx];
+      })
+      .addCase(fetchTopRatedMovies.rejected, handleRejected);
   },
 });
 

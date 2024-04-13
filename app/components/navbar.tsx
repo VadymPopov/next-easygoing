@@ -16,7 +16,7 @@ import ThemeSwitcher from "./theme-switcher";
 
 export default function AppBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = ["Listo", "Nums", "Netflix&Chill"];
+  const menuItems = ["Listo", "Nums"];
   const pathname = usePathname();
 
   return (
@@ -54,6 +54,16 @@ export default function AppBar() {
               </Link>
             </NavbarItem>
           ))}
+          <NavbarItem isActive={pathname.includes("/netflix&chill")}>
+            <Link
+              href='/netflix&chill/oracle'
+              className={clsx(
+                pathname.includes("/netflix&chill") && "text-blue-500",
+                "hover:text-secondary transition-colors"
+              )}>
+              Netflix&Chill
+            </Link>
+          </NavbarItem>
         </NavbarContent>
       </Navbar>
 
@@ -96,6 +106,17 @@ export default function AppBar() {
               </Link>
             </NavbarMenuItem>
           ))}
+          <NavbarMenuItem isActive={pathname.includes("/netflix&chill")}>
+            <Link
+              href='/netflix&chill/oracle'
+              onClick={() => setIsMenuOpen(false)}
+              className={clsx(
+                pathname.includes("/netflix&chill") && "text-blue-500",
+                "hover:text-secondary transition-colors text-2xl"
+              )}>
+              Netflix&Chill
+            </Link>
+          </NavbarMenuItem>
           <ThemeSwitcher />
         </NavbarMenu>
       </Navbar>
