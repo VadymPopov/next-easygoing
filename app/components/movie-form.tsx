@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent, useMemo } from "react";
 import {
   Button,
   Input,
@@ -13,16 +13,20 @@ import {
   selectGenres,
   selectYear,
   selectTotalPages,
+  selectRandomPage,
+  selectIsLoading,
 } from "@/lib/selectors";
 import {
   addSelectedGenres,
   addSelectedYear,
+  updateRandomIdx,
   updateRandomPage,
 } from "@/lib/moviesSlice";
-import toast from "react-hot-toast";
-import MatrixDigitalRain from "./matrix-rain";
-import { getInitialMovie } from "@/helpers/movies";
-import { getGenres, fetchTotalPagesByGenreAndYear } from "@/lib/operations";
+import {
+  getGenres,
+  fetchTotalPagesByGenreAndYear,
+  fetchMoviesByGenreAndYear,
+} from "@/lib/operations";
 import { getRandomNumber } from "@/helpers/random";
 
 type Genre = {
@@ -33,56 +37,45 @@ type Genre = {
 export default function MovieForm() {
   const selectedGenres = useAppSelector(selectGenres);
   const selectedYear = useAppSelector(selectYear);
-  const generesArray = useAppSelector(selectAllGenres);
+  const genresArray = useAppSelector(selectAllGenres);
   const totalPages = useAppSelector(selectTotalPages);
+  const randomPage = useAppSelector(selectRandomPage);
+  const isLoading = useAppSelector(selectIsLoading);
   const [values, setValues] = useState<Selection>(new Set([]));
   const [year, setYear] = useState(new Date().getFullYear().toString());
-  const [isInvalid, setIsInvalid] = useState(false);
-  const [shouldUnmount, setShouldUnmount] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (generesArray.length <= 0) {
+  useMemo(() => {
+    if (genresArray.length === 0) {
       dispatch(getGenres());
     }
-  }, [dispatch, generesArray]);
-
-  const showToastWithDelay = (
-    message: string,
-    delay: number,
-    duration: number
-  ) => {
-    setTimeout(() => {
-      toast(message, {
-        duration: duration,
-        position: "top-center",
-      });
-    }, delay);
-  };
+  }, [dispatch, genresArray]);
 
   useEffect(() => {
-    if (shouldUnmount) {
-      const timer = setTimeout(() => {
-        setShouldUnmount(false);
-      }, 5000);
+    const data: {
+      genres: string;
+      year: string;
+      page: string;
+    } = {
+      genres: selectedGenres,
+      year: selectedYear,
+      page: randomPage,
+    };
 
-      return () => {
-        clearTimeout(timer);
-      };
-    }
-  }, [shouldUnmount]);
+    dispatch(fetchMoviesByGenreAndYear(data));
+  }, [dispatch, selectedGenres, randomPage, selectedYear]);
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target as HTMLFormElement;
     const genres = Array.from(values).join(",");
+    dispatch(updateRandomIdx(getRandomNumber(20)));
 
     if (genres !== selectedGenres || year !== selectedYear) {
       dispatch(addSelectedGenres(genres));
       dispatch(addSelectedYear(year));
       dispatch(fetchTotalPagesByGenreAndYear({ genres, year }));
     }
+
     if (totalPages) {
       dispatch(updateRandomPage(getRandomNumber(totalPages)));
     }
@@ -107,7 +100,7 @@ export default function MovieForm() {
           selectedKeys={values}
           labelPlacement='outside'
           onSelectionChange={setValues}>
-          {generesArray.map((genre: Genre) => (
+          {genresArray.map((genre: Genre) => (
             <SelectItem key={genre.id} value={genre.id}>
               {genre.name}
             </SelectItem>
@@ -123,8 +116,6 @@ export default function MovieForm() {
           label='Enter the year'
           labelPlacement='outside'
           variant='underlined'
-          isInvalid={isInvalid}
-          errorMessage={isInvalid && "That's not serious"}
           onChange={handleValueChange}
           value={year}
         />
@@ -134,18 +125,10 @@ export default function MovieForm() {
           size='md'
           variant='ghost'
           color='primary'
-          isDisabled={isDisabled}>
+          isDisabled={isLoading}>
           Ask the Oracle
         </Button>
       </form>
-      {/* {randomNumber !== null && shouldUnmount && (
-        <>
-          <MatrixDigitalRain />
-          <p className='animate-pulse z-50 text-white text-4xl fixed top-0 left-0 w-full h-full flex items-center justify-center'>
-            {randomNumber}
-          </p>
-        </>
-      )} */}
     </>
   );
 }

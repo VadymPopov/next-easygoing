@@ -24,27 +24,37 @@ const handleRejected = (state, action) => {
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {
-    moviesArray: [],
-    movie: {},
-    movieDetails: {},
-    trailerKey: "",
-    totalPages: null,
+    topRatedPage: {
+      movie: {},
+      movieDetails: {},
+      trailerKey: "",
+    },
+    oraclePage: {
+      movie: {},
+      movieDetails: {},
+      trailerKey: "",
+      totalPages: null,
+      selectedGenres: "",
+      selectedYear: initialYear,
+    },
     randomPage: 1,
+    randomIdx: 1,
     genres: [],
-    selectedGenres: "",
-    selectedYear: initialYear,
     isLoading: false,
     error: null,
   },
   reducers: {
     addSelectedGenres(state, action: PayloadAction<string>) {
-      state.selectedGenres = action.payload;
+      state.oraclePage.selectedGenres = action.payload;
     },
     addSelectedYear(state, action: PayloadAction<string>) {
-      state.selectedYear = action.payload;
+      state.oraclePage.selectedYear = action.payload;
     },
     updateRandomPage(state, action: PayloadAction<number>) {
       state.randomPage = action.payload;
+    },
+    updateRandomIdx(state, action: PayloadAction<number>) {
+      state.randomIdx = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -60,7 +70,11 @@ const moviesSlice = createSlice({
       .addCase(fetchInitialMovie.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.movie = action.payload;
+        if (action.payload.type === "oracle") {
+          state.oraclePage.movie = action.payload.response;
+        } else {
+          state.topRatedPage.movie = action.payload.response;
+        }
       })
       .addCase(fetchInitialMovie.rejected, handleRejected)
       .addCase(fetchTotalPagesByGenreAndYear.pending, handlePending)
@@ -70,46 +84,57 @@ const moviesSlice = createSlice({
         );
         state.isLoading = false;
         state.error = null;
-        state.totalPages = action.payload > 500 ? 500 : action.payload;
+        state.oraclePage.totalPages =
+          action.payload > 500 ? 500 : action.payload;
         state.randomPage = randomPage;
       })
       .addCase(fetchTotalPagesByGenreAndYear.rejected, handleRejected)
       .addCase(fetchMoviesByGenreAndYear.pending, handlePending)
       .addCase(fetchMoviesByGenreAndYear.fulfilled, (state, action) => {
-        const randomIdx = getRandomNumber(20);
         state.isLoading = false;
         state.error = null;
-        state.moviesArray = action.payload;
-        state.movie = action.payload[randomIdx];
+        state.oraclePage.movie = action.payload[state.randomIdx];
       })
       .addCase(fetchMoviesByGenreAndYear.rejected, handleRejected)
       .addCase(fetchMovieDetailsById.pending, handlePending)
       .addCase(fetchMovieDetailsById.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.movieDetails = action.payload;
+        if (action.payload.type === "oracle") {
+          state.oraclePage.movieDetails = action.payload.response;
+        } else {
+          state.topRatedPage.movieDetails = action.payload.response;
+        }
       })
       .addCase(fetchMovieDetailsById.rejected, handleRejected)
       .addCase(getMovieTrailerById.pending, handlePending)
       .addCase(getMovieTrailerById.fulfilled, (state, action) => {
-        const trailer = action.payload.find((e) => e.type === "Trailer");
+        const trailer = action.payload.response.find(
+          (e) => e.type === "Trailer"
+        );
         state.isLoading = false;
         state.error = null;
-        state.trailerKey = trailer && trailer.key;
+        if (action.payload.type === "oracle") {
+          state.oraclePage.trailerKey = trailer ? trailer.key : "";
+        } else {
+          state.topRatedPage.trailerKey = trailer ? trailer.key : "";
+        }
       })
       .addCase(getMovieTrailerById.rejected, handleRejected)
       .addCase(fetchTopRatedMovies.pending, handlePending)
       .addCase(fetchTopRatedMovies.fulfilled, (state, action) => {
-        const randomIdx = getRandomNumber(20);
         state.isLoading = false;
         state.error = null;
-        // state.moviesArray = action.payload;
-        state.movie = action.payload[randomIdx];
+        state.topRatedPage.movie = action.payload[state.randomIdx];
       })
       .addCase(fetchTopRatedMovies.rejected, handleRejected);
   },
 });
 
-export const { addSelectedGenres, addSelectedYear, updateRandomPage } =
-  moviesSlice.actions;
+export const {
+  addSelectedGenres,
+  addSelectedYear,
+  updateRandomPage,
+  updateRandomIdx,
+} = moviesSlice.actions;
 export const moviesReducer = moviesSlice.reducer;

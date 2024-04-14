@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -11,20 +11,40 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import {
-  selectMovie,
-  selectMovieDetails,
-  selectTrailerKey,
+  selectOracleMovieDetails,
+  selectOracleTrailerKey,
+  selectTopRatedMovieDetails,
+  selectTopRatedTrailerKey,
 } from "@/lib/selectors";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { fetchMovieDetailsById, getMovieTrailerById } from "@/lib/operations";
+import { useAppSelector } from "@/lib/hooks";
 
-export default function MovieModal() {
+export default function MovieModal({ type }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const oracleTrailerKey = useAppSelector(selectOracleTrailerKey);
+  const topRatedTrailerKey = useAppSelector(selectTopRatedTrailerKey);
+  const oracleMovieDetails = useAppSelector(selectOracleMovieDetails);
+  const topRatedMovieDetails = useAppSelector(selectTopRatedMovieDetails);
+  const [trailerKey, setTrailerKey] = useState("");
+  const [movieDetails, setMovieDetails] = useState("");
 
-  const dispatch = useAppDispatch();
-  const movie = useAppSelector(selectMovie);
-  const trailerKey = useAppSelector(selectTrailerKey);
-  const movieDetails = useAppSelector(selectMovieDetails);
+  const setTrailerAndDetails = (trailer, details) => {
+    setTrailerKey(trailer);
+    setMovieDetails(details);
+  };
+
+  useEffect(() => {
+    if (type === "oracle") {
+      setTrailerAndDetails(oracleTrailerKey, oracleMovieDetails);
+    } else {
+      setTrailerAndDetails(topRatedTrailerKey, topRatedMovieDetails);
+    }
+  }, [
+    oracleMovieDetails,
+    oracleTrailerKey,
+    topRatedMovieDetails,
+    topRatedTrailerKey,
+    type,
+  ]);
 
   const {
     backdrop_path,
@@ -39,13 +59,6 @@ export default function MovieModal() {
     runtime,
     title,
   } = movieDetails;
-
-  useEffect(() => {
-    if (movie && movie.id) {
-      dispatch(fetchMovieDetailsById(movie.id));
-      dispatch(getMovieTrailerById(movie.id));
-    }
-  }, [dispatch, movie]);
 
   const handleBtnClick = () => {
     window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
@@ -108,7 +121,7 @@ export default function MovieModal() {
                           </td>
                         </tr>
                       )}
-                      {genres.length > 0 && (
+                      {genres?.length > 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
                             Genre
@@ -135,7 +148,7 @@ export default function MovieModal() {
                         </tr>
                       )}
 
-                      {production_countries.length > 0 && (
+                      {production_countries?.length > 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
                             Country

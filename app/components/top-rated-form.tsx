@@ -1,28 +1,15 @@
 "use client";
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import {
   Button,
-  Input,
-  Select,
-  SelectItem,
-  Selection,
 } from "@nextui-org/react";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import {
-  selectAllGenres,
-  selectGenres,
-  selectYear,
-  selectTotalPages,
-} from "@/lib/selectors";
-import {
-  addSelectedGenres,
-  addSelectedYear,
-  updateRandomPage,
-} from "@/lib/moviesSlice";
+import { useAppDispatch } from "@/lib/hooks";
+
 import toast from "react-hot-toast";
 import MatrixDigitalRain from "./matrix-rain";
-import { getInitialMovie } from "@/helpers/movies";
-import { getGenres, fetchTotalPagesByGenreAndYear } from "@/lib/operations";
+import {
+  fetchTopRatedMovies,
+} from "@/lib/operations";
 import { getRandomNumber } from "@/helpers/random";
 
 type Genre = {
@@ -63,7 +50,7 @@ export default function TopRatedForm() {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(updateRandomPage(getRandomNumber(200)));
+    dispatch(fetchTopRatedMovies(getRandomNumber(200)));
   };
 
   return (

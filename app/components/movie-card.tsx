@@ -1,54 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
 import { Card, CardFooter, Image, CardBody } from "@nextui-org/react";
 import MovieModal from "./modal";
-import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import {
-  fetchInitialMovie,
-  fetchMoviesByGenreAndYear,
-  fetchTopRatedMovies,
-} from "@/lib/operations";
-import {
-  selectGenres,
-  selectMovie,
-  selectRandomPage,
-  selectYear,
-} from "@/lib/selectors";
-import { updateRandomPage } from "@/lib/moviesSlice";
-import { getRandomNumber } from "@/helpers/random";
 
-export default function MovieCard({ type }: { type: string }) {
-  const dispatch = useAppDispatch();
-  const year = useAppSelector(selectYear);
-  const genres = useAppSelector(selectGenres);
-  const movie = useAppSelector(selectMovie);
-  const randomPage = useAppSelector(selectRandomPage);
+type MovieCardProps = {
+  title: string;
+  poster: string;
+  type: string;
+};
 
-  const { title, poster_path } = movie || {};
-
-  useEffect(() => {
-    if (randomPage && year && type === "oracle") {
-      const data: { genres: string; year: string; page: string } = {
-        genres: genres,
-        year: year,
-        page: randomPage.toString(),
-      };
-      dispatch(fetchMoviesByGenreAndYear(data));
-    }
-  }, [dispatch, genres, randomPage, type, year]);
-
-  useEffect(() => {
-    if (type === "top-rated") {
-      dispatch(fetchTopRatedMovies(randomPage));
-    }
-  }, [dispatch, randomPage, type]);
-
-  useEffect(() => {
-    if (movie && Object.keys(movie).length === 0) {
-      dispatch(fetchInitialMovie());
-    }
-  }, [dispatch, movie]);
-
+export default function MovieCard({ title, poster, type }: MovieCardProps) {
   return (
     <>
       <Card isFooterBlurred radius='lg' className='border-none max-w-96 m-auto'>
@@ -57,8 +17,8 @@ export default function MovieCard({ type }: { type: string }) {
             alt={title}
             className='object-cover max-w-96'
             src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+              poster
+                ? `https://image.tmdb.org/t/p/w500/${poster}`
                 : "/fallback-img.jpg"
             }
             isZoomed
@@ -66,7 +26,7 @@ export default function MovieCard({ type }: { type: string }) {
         </CardBody>
         <CardFooter className='justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10'>
           <p className='text-tiny text-white/80 uppercase'>{title}</p>
-          <MovieModal />
+          <MovieModal type={type} />
         </CardFooter>
       </Card>
     </>

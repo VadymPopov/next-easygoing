@@ -1,4 +1,3 @@
-import { getRandomNumber } from "@/helpers/random";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -28,12 +27,12 @@ export const getGenres = createAsyncThunk(
 
 export const fetchInitialMovie = createAsyncThunk(
   "movies/initialMovie",
-  async (_, thunkAPI) => {
+  async ({ query, year, type }, thunkAPI) => {
     try {
       const response = await axiosInstance.get(
-        "/search/movie?query=The%20Matrix&year=1999"
+        `/search/movie?query=${query}&year=${year}`
       );
-      return response.data.results[0];
+      return { response: response.data.results[0], type };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -58,7 +57,7 @@ export const fetchMoviesByGenreAndYear = createAsyncThunk(
 
 export const fetchTopRatedMovies = createAsyncThunk(
   "movies/topRatedMovies",
-  async (randomPage, thunkAPI) => {
+  async (randomPage: string, thunkAPI) => {
     const queryStr = `/movie/top_rated?&page=${randomPage}&language=en-US`;
     try {
       const response = await axiosInstance.get(queryStr);
@@ -71,10 +70,10 @@ export const fetchTopRatedMovies = createAsyncThunk(
 
 export const fetchMovieDetailsById = createAsyncThunk(
   "movies/movieDetailsById",
-  async (id, thunkAPI) => {
+  async ({ id, type }, thunkAPI) => {
     try {
       const response = await axiosInstance.get(`/movie/${id}?language=en-US`);
-      return response.data;
+      return { response: response.data, type };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -83,12 +82,12 @@ export const fetchMovieDetailsById = createAsyncThunk(
 
 export const getMovieTrailerById = createAsyncThunk(
   "movies/movieTrailerById",
-  async (id, thunkAPI) => {
+  async ({ id, type }, thunkAPI) => {
     try {
       const response = await axiosInstance.get(
         `/movie/${id}/videos?language=en-US`
       );
-      return response.data.results;
+      return { response: response.data.results, type };
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
@@ -98,7 +97,6 @@ export const getMovieTrailerById = createAsyncThunk(
 export const fetchTotalPagesByGenreAndYear = createAsyncThunk(
   "movies/totalPagesByGenreAndYear",
   async ({ genres, year }, thunkAPI) => {
-    console.log(genres);
     const queryStr = genres
       ? `/discover/movie?with_genres=${genres}&year=${year}&language=en-US`
       : `/discover/movie?year=${year}&language=en-US`;
