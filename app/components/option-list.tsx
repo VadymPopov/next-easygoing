@@ -20,6 +20,7 @@ export type OptionsType = {
 
 export function OptionList() {
   const [shouldUnmount, setShouldUnmount] = useState(false);
+  const [showRandomOption, setShowRandomOption] = useState(false);
   const dispatch = useAppDispatch();
   const options = useAppSelector(selectOptions);
   const randomIndex = useAppSelector(selectRandomIdx);
@@ -30,9 +31,13 @@ export function OptionList() {
       const timer = setTimeout(() => {
         setShouldUnmount(false);
       }, 5000);
+      const timerOption = setTimeout(() => {
+        setShowRandomOption(true);
+      }, 1000);
 
       return () => {
         clearTimeout(timer);
+        clearTimeout(timerOption);
       };
     }
   }, [shouldUnmount]);
@@ -72,6 +77,7 @@ export function OptionList() {
     const generatedIdx = getRandomNumber(options.length) - 1;
     dispatch(addIdx(generatedIdx));
     setShouldUnmount(true);
+    setShowRandomOption(false);
   };
 
   return (
@@ -99,9 +105,11 @@ export function OptionList() {
       {options[randomIndex] && shouldUnmount && (
         <>
           <MatrixDigitalRain />
-          <p className='animate-pulse z-50 text-white text-4xl fixed top-0 left-0 w-full h-full flex items-center justify-center'>
-            {options[randomIndex]?.text}
-          </p>
+          {showRandomOption && (
+            <p className='animate-pulse z-50 text-white text-2xl lg:text-4xl px-6 fixed top-0 left-0 w-full h-full flex items-center justify-center'>
+              {options[randomIndex]?.text}
+            </p>
+          )}
         </>
       )}
     </>

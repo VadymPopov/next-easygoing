@@ -7,7 +7,7 @@ export default function Page() {
         <h1 className='gradient-animation bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl mb-6'>
           Choose wisely
         </h1>
-        <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 text-gray-500 mb-6 lg:text-center xl:px-56 lg:px-40 md:px-20'>
+        <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 mb-6 lg:text-center xl:px-56 lg:px-40 md:px-20'>
           “You take the{" "}
           <span className='text-blue-600 font-semibold'>blue pill</span>, the
           story ends, you wake up in your bed and believe whatever you want to

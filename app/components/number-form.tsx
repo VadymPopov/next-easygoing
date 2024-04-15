@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
-import { Button, Input } from "@nextui-org/react";
+import { useState, useEffect, ChangeEvent } from "react";
+import { Input } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addNumber, deleteNumber } from "@/lib/randomSlice";
 import { selectRandomNumber } from "@/lib/selectors";
@@ -14,6 +14,7 @@ export default function NumberForm() {
   const [maxValue, setMaxValue] = useState("0");
   const [isInvalid, setIsInvalid] = useState(false);
   const [shouldUnmount, setShouldUnmount] = useState(false);
+  const [showRandomNumber, setShowRandomNumber] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const dispatch = useAppDispatch();
   const randomNumber = useAppSelector(selectRandomNumber);
@@ -36,9 +37,13 @@ export default function NumberForm() {
       const timer = setTimeout(() => {
         setShouldUnmount(false);
       }, 5000);
+      const timerNumber = setTimeout(() => {
+        setShowRandomNumber(true);
+      }, 1000);
 
       return () => {
         clearTimeout(timer);
+        clearTimeout(timerNumber);
       };
     }
   }, [shouldUnmount]);
@@ -63,20 +68,16 @@ export default function NumberForm() {
     }
 
     if (randomNumber !== null) {
-      showToastWithDelay("the Oracle sees you", 300, 3000);
-      showToastWithDelay(
-        "You are really think that you can cheat?!",
-        1000,
-        3500
-      );
+      showToastWithDelay("Are you serious???", 300, 3000);
+      showToastWithDelay("Again?!", 1000, 3500);
       showToastWithDelay("I know you better then this", 1400, 3000);
       showToastWithDelay(
-        "Change the list if you want one more try...",
+        "Change the numbers if you want one more try...",
         1800,
         5000
       );
-      showToastWithDelay("Dont upset me anymore", 2000, 3500);
-      showToastWithDelay("I am watching you", 2200, 3200);
+      showToastWithDelay("Be smarter next time", 2000, 3500);
+      showToastWithDelay("I am always watching you", 2200, 3200);
       setIsDisabled(true);
       return;
     }
@@ -84,6 +85,7 @@ export default function NumberForm() {
     const generatedNumber = getRandomIntInclusive(minNumber, maxNumber);
     dispatch(addNumber(generatedNumber));
     setShouldUnmount(true);
+    setShowRandomNumber(false);
   };
 
   const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -142,9 +144,11 @@ export default function NumberForm() {
       {randomNumber !== null && shouldUnmount && (
         <>
           <MatrixDigitalRain />
-          <p className='animate-pulse z-50 text-white text-4xl fixed top-0 left-0 w-full h-full flex items-center justify-center'>
-            {randomNumber}
-          </p>
+          {showRandomNumber && (
+            <p className='animate-pulse z-50 text-white text-6xl fixed top-0 left-0 w-full h-full flex items-center justify-center'>
+              {randomNumber}
+            </p>
+          )}
         </>
       )}
     </>

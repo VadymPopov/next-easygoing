@@ -18,10 +18,39 @@ const config: Config = {
         dark: {
           colors: {
             primary: {
-              DEFAULT: "#BEF264",
-              foreground: "#000000",
+              DEFAULT: "#FF6C00",
             },
-            focus: "#BEF264",
+            secondary: {
+              DEFAULT: "#FF944D",
+            },
+            success: {
+              DEFAULT: "#2563eb",
+            },
+            warning: {
+              DEFAULT: "#e11d48",
+            },
+            danger: {
+              DEFAULT: "#dc2626",
+            },
+          },
+        },
+        light: {
+          colors: {
+            primary: {
+              DEFAULT: "#2563eb",
+            },
+            secondary: {
+              DEFAULT: "#5b7bd7",
+            },
+            success: {
+              DEFAULT: "#dc2626",
+            },
+            warning: {
+              DEFAULT: "#a21caf",
+            },
+            danger: {
+              DEFAULT: "#ec4899",
+            },
           },
         },
       },

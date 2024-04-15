@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { Button } from "@nextui-org/react";
-import { GiPill } from "react-icons/gi";
 
 type AskButtonProps = {
   isDisabled: boolean;
@@ -21,8 +20,9 @@ export default function AskButton({
       variant='ghost'
       className='text-lg flex items-center justify-center m-auto gap-4 mb-6 font-semibold'
       isDisabled={isDisabled}
-      onClick={onClick}>
-      Ask the Oracle <GiPill className='animate-spin h-10 w-10 text-current' />
+      onClick={onClick}
+      color='success'>
+      Ask the Oracle
     </Button>
   );
 }

@@ -42,7 +42,7 @@ export default function AppBar() {
                 href={`/${item.toLocaleLowerCase()}`}
                 className={clsx(
                   pathname === `/${item.toLocaleLowerCase()}` &&
-                    "text-blue-500",
+                    "text-primary hover:text-primary",
                   "hover:text-secondary transition-colors"
                 )}>
                 {item}
@@ -53,7 +53,8 @@ export default function AppBar() {
             <Link
               href='/netflix&chill/oracle'
               className={clsx(
-                pathname.includes("/netflix&chill") && "text-blue-500",
+                pathname.includes("/netflix&chill") &&
+                  "text-primary hover:text-primary",
                 "hover:text-secondary transition-colors"
               )}>
               Netflix&Chill
@@ -94,7 +95,7 @@ export default function AppBar() {
                 onClick={() => setIsMenuOpen(false)}
                 className={clsx(
                   pathname === `/${item.toLocaleLowerCase()}` &&
-                    "text-blue-500",
+                    "text-primary hover:text-primary",
                   "hover:text-secondary transition-colors text-2xl"
                 )}>
                 {item}
@@ -106,7 +107,8 @@ export default function AppBar() {
               href='/netflix&chill/oracle'
               onClick={() => setIsMenuOpen(false)}
               className={clsx(
-                pathname.includes("/netflix&chill") && "text-blue-500",
+                pathname.includes("/netflix&chill") &&
+                  "text-primary hover:text-primary",
                 "hover:text-secondary transition-colors text-2xl"
               )}>
               Netflix&Chill

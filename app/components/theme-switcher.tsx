@@ -25,7 +25,7 @@ export default function ThemeSwitcher() {
         variant='light'
         radius='full'
         size='sm'>
-        <GiPill color='red' size={30} />
+        <GiPill color='#dc2626' size={30} />
       </Button>
     );
   }
@@ -38,7 +38,7 @@ export default function ThemeSwitcher() {
         variant='light'
         radius='full'
         size='sm'>
-        <GiPill color='blue' size={30} />
+        <GiPill color='#2563eb' size={30} />
       </Button>
     );
   }

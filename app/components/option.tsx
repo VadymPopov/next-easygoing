@@ -27,7 +27,9 @@ export default function Option({
 
   return (
     <div className='flex items-center justify-between'>
-      <p className='text-lg'>{`${idx + 1}. ${option.text}`}</p>
+      <span className='text-lg break-words flex-grow-1 mr-2 max-w-full sm:max-w-md md:max-w-lg lg:max-w-xl'>{`${
+        idx + 1
+      }. ${option.text}`}</span>
       <button onClick={handleDelete}>
         <FaTrash className='fill-red-600' size={24} />
       </button>
