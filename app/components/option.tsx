@@ -6,7 +6,13 @@ import { FaTrash } from "react-icons/fa";
 import { deleteIdx, toggleIsDisabled } from "@/lib/randomSlice";
 import { selectRandomIdx } from "@/lib/selectors";
 
-export function Option({ option, idx }: { option: OptionsType; idx: number }) {
+export default function Option({
+  option,
+  idx,
+}: {
+  option: OptionsType;
+  idx: number;
+}) {
   const dispatch = useAppDispatch();
   const randomIndex = useAppSelector(selectRandomIdx);
 

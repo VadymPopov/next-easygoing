@@ -28,6 +28,7 @@ import {
   fetchMoviesByGenreAndYear,
 } from "@/lib/operations";
 import { getRandomNumber } from "@/helpers/random";
+import AskButton from "./ask-button";
 
 type Genre = {
   id: number;
@@ -88,46 +89,39 @@ export default function MovieForm() {
 
   return (
     <>
-      <form
-        className='flex items-center justify-center gap-4 mb-6'
-        onSubmit={handleSubmit}>
-        <Select
-          label='Select the genre'
-          name='genres'
-          selectionMode='multiple'
-          className='max-w-xs'
-          variant='underlined'
-          selectedKeys={values}
-          labelPlacement='outside'
-          onSelectionChange={setValues}>
-          {genresArray.map((genre: Genre) => (
-            <SelectItem key={genre.id} value={genre.id}>
-              {genre.name}
-            </SelectItem>
-          ))}
-        </Select>
-        <Input
-          className=''
-          type='number'
-          name='year'
-          step={1}
-          min={1888}
-          max={new Date().getFullYear().toString()}
-          label='Enter the year'
-          labelPlacement='outside'
-          variant='underlined'
-          onChange={handleValueChange}
-          value={year}
-        />
-        <Button
-          type='submit'
-          radius='full'
-          size='md'
-          variant='ghost'
-          color='primary'
-          isDisabled={isLoading}>
-          Ask the Oracle
-        </Button>
+      <form className='mb-6' onSubmit={handleSubmit}>
+        <div className='flex items-center justify-center gap-4 mb-6'>
+          <Select
+            label='Select the genre'
+            name='genres'
+            selectionMode='multiple'
+            className='max-w-xs'
+            variant='underlined'
+            selectedKeys={values}
+            labelPlacement='outside'
+            onSelectionChange={setValues}>
+            {genresArray.map((genre: Genre) => (
+              <SelectItem key={genre.id} value={genre.id}>
+                {genre.name}
+              </SelectItem>
+            ))}
+          </Select>
+          <Input
+            className=''
+            type='number'
+            name='year'
+            step={1}
+            min={1888}
+            max={new Date().getFullYear().toString()}
+            label='Enter the year'
+            labelPlacement='outside'
+            variant='underlined'
+            onChange={handleValueChange}
+            value={year}
+          />
+        </div>
+
+        <AskButton type='submit' isDisabled={isLoading} />
       </form>
     </>
   );

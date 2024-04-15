@@ -54,7 +54,7 @@ export function OptionForm() {
         size='md'
         variant='ghost'
         color='primary'>
-        Add task
+        Add
       </Button>
     </form>
   );

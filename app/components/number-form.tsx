@@ -7,8 +7,9 @@ import { selectRandomNumber } from "@/lib/selectors";
 import toast from "react-hot-toast";
 import { getRandomIntInclusive } from "@/helpers/random";
 import MatrixDigitalRain from "./matrix-rain";
+import AskButton from "./ask-button";
 
-export function NumberForm() {
+export default function NumberForm() {
   const [minValue, setMinValue] = useState("0");
   const [maxValue, setMaxValue] = useState("0");
   const [isInvalid, setIsInvalid] = useState(false);
@@ -55,7 +56,7 @@ export function NumberForm() {
     const minNumber = parseInt(minNumberInput.value, 10);
     const maxNumber = parseInt(maxNumberInput.value, 10);
 
-    if (isNaN(minNumber) || isNaN(maxNumber) || minNumber >= maxNumber) {
+    if (minNumber >= maxNumber) {
       return setIsInvalid(true);
     } else {
       setIsInvalid(false);
@@ -94,7 +95,7 @@ export function NumberForm() {
       setMaxValue(value);
     }
 
-    if (randomNumber) {
+    if (randomNumber !== null) {
       dispatch(deleteNumber());
     }
 
@@ -103,48 +104,40 @@ export function NumberForm() {
 
   return (
     <>
-      <form
-        className='flex items-center justify-center gap-4 mb-6'
-        onSubmit={handleSubmit}>
-        <Input
-          className=''
-          type='number'
-          name='minNumber'
-          step={1}
-          min={0}
-          label='Enter minimum value'
-          labelPlacement='outside'
-          variant='underlined'
-          isInvalid={isInvalid}
-          errorMessage={isInvalid && "That's not serious"}
-          onChange={handleValueChange}
-          value={minValue}
-        />
-        <Input
-          className=''
-          type='number'
-          name='maxNumber'
-          step={1}
-          min={0}
-          label='Enter maximum value'
-          labelPlacement='outside'
-          variant='underlined'
-          isInvalid={isInvalid}
-          errorMessage={
-            isInvalid && "That's not serious, max value is the maximum"
-          }
-          onChange={handleValueChange}
-          value={maxValue}
-        />
-        <Button
-          type='submit'
-          radius='full'
-          size='md'
-          variant='ghost'
-          color='primary'
-          isDisabled={isDisabled}>
-          Generate
-        </Button>
+      <form className='mb-6' onSubmit={handleSubmit}>
+        <div className='flex flex-column items-center justify-center gap-4 mb-6'>
+          <Input
+            className=''
+            type='number'
+            name='minNumber'
+            step={1}
+            min={0}
+            label='Enter minimum value'
+            labelPlacement='outside'
+            variant='underlined'
+            isInvalid={isInvalid}
+            errorMessage={isInvalid && "That's not serious"}
+            onChange={handleValueChange}
+            value={minValue}
+          />
+          <Input
+            className=''
+            type='number'
+            name='maxNumber'
+            step={1}
+            min={0}
+            label='Enter maximum value'
+            labelPlacement='outside'
+            variant='underlined'
+            isInvalid={isInvalid}
+            errorMessage={
+              isInvalid && "That's not serious, max value is the maximum"
+            }
+            onChange={handleValueChange}
+            value={maxValue}
+          />
+        </div>
+        <AskButton isDisabled={isDisabled} type='submit' />
       </form>
       {randomNumber !== null && shouldUnmount && (
         <>

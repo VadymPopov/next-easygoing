@@ -26,12 +26,7 @@ export default function AppBar() {
         className='hidden sm:block sm:mt-5 sm:rounded-full sm:border-gray-400 sm:border-2 sm:w-[600px] lg:w-[800px] sm:mx-auto sm:drop-shadow-xl'>
         <NavbarContent>
           <NavbarBrand className='justify-end sm:justify-start'>
-            <Link
-              href='/'
-              aria-current='page'
-              className='font-bold text-inherit'>
-              EasyGoing
-            </Link>
+            <span className='font-bold text-inherit'>EasyGoing</span>
           </NavbarBrand>
         </NavbarContent>
         <ThemeSwitcher />

@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import MovieNavbar from "@/app/components/movie-navbar";
+import Hero from "@/app/components/hero";
+import Steps from "@/app/components/steps";
 export const metadata: Metadata = {
   title: "Netflix&Chill",
 };
@@ -7,15 +9,16 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className='text-center mb-6 '>
-        <h1 className='bg-gradient-to-r from-red-700 via-purple-500 to-blue-600 bg-clip-text text-3xl font-bold text-transparent sm:text-4xl leading-8 p-4'>
-          The name speaks by itself
-        </h1>
-        <p className='xl:text-xl text-lg text-justify  xl:leading-8 md:leading-6 text-gray-500  lg:text-center xl:px-56 lg:px-40 md:px-20'>
-          Classic back-and-forth of &quot;What should we watch tonight?&quot;
-          &quot;I don&apos;t know, what do you want?&quot;.
-        </p>
-      </div>
+      <Hero
+        title="What's on Tonight? Let's Decide Together!"
+        text='Classic back-and-forth of "What should we watch tonight?"
+          "I don&apos;t know, what do you want?".'
+      />
+      <Steps
+        stepOne="On this page, you have two options to choose from: the Oracle's Choice and Top Rated. Decide how you want to search for a movie today."
+        stepTwo="Oracle's Choice: Select one or more genres, or leave the field empty for a genreless search. Then, enter the release year of the films. For Top Rated, simply proceed to the next step."
+        stepThree='Click the "Ask the Oracle" button, and don&apos;t forget to read the movie details!'
+      />
       <MovieNavbar />
       <div>{children}</div>
     </>

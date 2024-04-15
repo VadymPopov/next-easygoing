@@ -1,13 +1,12 @@
 "use client";
-import { Option } from "./option";
+import Option from "./option";
+import AskButton from "./ask-button";
 import {
   selectIsDisabled,
   selectOptions,
   selectRandomIdx,
 } from "@/lib/selectors";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { Button, Link } from "@nextui-org/react";
-import { GiPill } from "react-icons/gi";
 import { getRandomNumber } from "@/helpers/random";
 import { addIdx, toggleIsDisabled } from "@/lib/randomSlice";
 import MatrixDigitalRain from "@/app/components/matrix-rain";
@@ -91,15 +90,11 @@ export function OptionList() {
         ))}
       </ul>
       {options.length >= 2 && (
-        <Button
-          size='lg'
-          variant='ghost'
-          className='text-lg flex items-center justify-center m-auto gap-4 mb-6 font-semibold'
+        <AskButton
+          type='button'
           isDisabled={isDisabled}
-          onClick={handleBtnClick}>
-          Ask the Oracle{" "}
-          <GiPill className='animate-spin h-10 w-10 text-current' />
-        </Button>
+          onClick={handleBtnClick}
+        />
       )}
       {options[randomIndex] && shouldUnmount && (
         <>
