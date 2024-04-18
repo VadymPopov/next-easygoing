@@ -1,34 +1,13 @@
 "use client";
-import { useState, useEffect, ChangeEvent, useMemo } from "react";
-import {
-  Button,
-  Input,
-  Select,
-  SelectItem,
-  Selection,
-} from "@nextui-org/react";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import {
-  selectAllGenres,
-  selectGenres,
-  selectYear,
-  selectTotalPages,
-  selectRandomPage,
-  selectIsLoading,
-} from "@/lib/selectors";
-import {
-  addSelectedGenres,
-  addSelectedYear,
-  updateRandomIdx,
-  updateRandomPage,
-} from "@/lib/moviesSlice";
-import {
-  getGenres,
-  fetchTotalPagesByGenreAndYear,
-  fetchMoviesByGenreAndYear,
-} from "@/lib/operations";
-import { getRandomNumber } from "@/helpers/random";
+import { useState } from "react";
+import { Input, Select, SelectItem, Selection } from "@nextui-org/react";
+import { useAppSelector } from "@/lib/hooks";
+import { selectIsLoading } from "@/lib/selectors";
+
 import AskButton from "./ask-button";
+import { useGenreSelection } from "@/hooks/useGenreSelection";
+import { useYearSelection } from "@/hooks/useYearSelection";
+import { useMovieFetch } from "@/hooks/useMovieFetch";
 
 type Genre = {
   id: number;
@@ -36,66 +15,21 @@ type Genre = {
 };
 
 export default function MovieForm() {
-  const selectedGenres = useAppSelector(selectGenres);
-  const selectedYear = useAppSelector(selectYear);
-  const genresArray = useAppSelector(selectAllGenres);
-  const totalPages = useAppSelector(selectTotalPages);
-  const randomPage = useAppSelector(selectRandomPage);
+  const { genresArray } = useGenreSelection();
+  const { year, handleChange } = useYearSelection();
   const isLoading = useAppSelector(selectIsLoading);
-  const [values, setValues] = useState<Selection>(new Set([]));
-  const [year, setYear] = useState(new Date().getFullYear().toString());
-  const dispatch = useAppDispatch();
-
-  useMemo(() => {
-    if (genresArray.length === 0) {
-      dispatch(getGenres());
-    }
-  }, [dispatch, genresArray]);
-
-  useEffect(() => {
-    const data: {
-      genres: string;
-      year: string;
-      page: string;
-    } = {
-      genres: selectedGenres,
-      year: selectedYear,
-      page: randomPage,
-    };
-
-    dispatch(fetchMoviesByGenreAndYear(data));
-  }, [dispatch, selectedGenres, randomPage, selectedYear]);
-
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const genres = Array.from(values).join(",");
-    dispatch(updateRandomIdx(getRandomNumber(20)));
-
-    if (genres !== selectedGenres || year !== selectedYear) {
-      dispatch(addSelectedGenres(genres));
-      dispatch(addSelectedYear(year));
-      dispatch(fetchTotalPagesByGenreAndYear({ genres, year }));
-    }
-
-    if (totalPages) {
-      dispatch(updateRandomPage(getRandomNumber(totalPages)));
-    }
-  };
-
-  const handleValueChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const year = event.target.value;
-    setYear(year);
-  };
+  const [values, setValues] = useState<Selection>(new Set<number>([]));
+  const { handleSubmit } = useMovieFetch(year, values);
 
   return (
     <>
       <form className='mb-6' onSubmit={handleSubmit}>
-        <div className='flex items-center justify-center gap-4 mb-6'>
+        <div className='flex md:flex-row flex-col items-center justify-center gap-4 mb-6'>
           <Select
             label='Select the genre'
             name='genres'
             selectionMode='multiple'
-            className='max-w-xs'
+            className='max-w-md min-w-xs'
             variant='underlined'
             selectedKeys={values}
             labelPlacement='outside'
@@ -107,7 +41,7 @@ export default function MovieForm() {
             ))}
           </Select>
           <Input
-            className=''
+            className='md:max-w-44 max-w-md'
             type='number'
             name='year'
             step={1}
@@ -116,7 +50,7 @@ export default function MovieForm() {
             label='Enter the year'
             labelPlacement='outside'
             variant='underlined'
-            onChange={handleValueChange}
+            onChange={handleChange}
             value={year}
           />
         </div>

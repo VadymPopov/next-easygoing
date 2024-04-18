@@ -12,7 +12,7 @@ export default function TopRatedForm() {
 
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(fetchTopRatedMovies(getRandomNumber(200)));
+    dispatch(fetchTopRatedMovies(getRandomNumber(200).toString()));
   };
 
   return (

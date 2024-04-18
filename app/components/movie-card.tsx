@@ -5,7 +5,7 @@ import MovieModal from "./modal";
 type MovieCardProps = {
   title: string;
   poster: string;
-  type: string;
+  type: "oracle" | "top-rated";
 };
 
 export default function MovieCard({ title, poster, type }: MovieCardProps) {

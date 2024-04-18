@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalContent,
@@ -8,43 +7,16 @@ import {
   ModalFooter,
   Image,
   Button,
-  useDisclosure,
 } from "@nextui-org/react";
-import {
-  selectOracleMovieDetails,
-  selectOracleTrailerKey,
-  selectTopRatedMovieDetails,
-  selectTopRatedTrailerKey,
-} from "@/lib/selectors";
-import { useAppSelector } from "@/lib/hooks";
+import { useMovieModal } from "@/hooks/useMovieModal";
 
-export default function MovieModal({ type }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const oracleTrailerKey = useAppSelector(selectOracleTrailerKey);
-  const topRatedTrailerKey = useAppSelector(selectTopRatedTrailerKey);
-  const oracleMovieDetails = useAppSelector(selectOracleMovieDetails);
-  const topRatedMovieDetails = useAppSelector(selectTopRatedMovieDetails);
-  const [trailerKey, setTrailerKey] = useState("");
-  const [movieDetails, setMovieDetails] = useState("");
+interface MovieModalProps {
+  type: "oracle" | "top-rated";
+}
 
-  const setTrailerAndDetails = (trailer, details) => {
-    setTrailerKey(trailer);
-    setMovieDetails(details);
-  };
-
-  useEffect(() => {
-    if (type === "oracle") {
-      setTrailerAndDetails(oracleTrailerKey, oracleMovieDetails);
-    } else {
-      setTrailerAndDetails(topRatedTrailerKey, topRatedMovieDetails);
-    }
-  }, [
-    oracleMovieDetails,
-    oracleTrailerKey,
-    topRatedMovieDetails,
-    topRatedTrailerKey,
-    type,
-  ]);
+export default function MovieModal({ type }: MovieModalProps) {
+  const { isOpen, onOpen, onOpenChange, trailerKey, movieDetails } =
+    useMovieModal(type);
 
   const {
     backdrop_path,
@@ -58,7 +30,7 @@ export default function MovieModal({ type }) {
     production_countries,
     runtime,
     title,
-  } = movieDetails;
+  } = movieDetails || {};
 
   const handleBtnClick = () => {
     window.open(`https://www.youtube.com/watch?v=${trailerKey}`, "_blank");
@@ -121,7 +93,7 @@ export default function MovieModal({ type }) {
                           </td>
                         </tr>
                       )}
-                      {genres?.length > 0 && (
+                      {genres && genres.length > 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
                             Genre
@@ -148,18 +120,19 @@ export default function MovieModal({ type }) {
                         </tr>
                       )}
 
-                      {production_countries?.length > 0 && (
-                        <tr>
-                          <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                            Country
-                          </td>
-                          <td>
-                            {production_countries
-                              .map((country) => country.iso_3166_1)
-                              .join(", ")}
-                          </td>
-                        </tr>
-                      )}
+                      {production_countries &&
+                        production_countries.length > 0 && (
+                          <tr>
+                            <td className='text-gray-300 pr-8 whitespace-no-wrap'>
+                              Country
+                            </td>
+                            <td>
+                              {production_countries
+                                .map((country) => country.iso_3166_1)
+                                .join(", ")}
+                            </td>
+                          </tr>
+                        )}
                     </tbody>
                   </table>
                   {overview && (

@@ -35,9 +35,7 @@ export default function AppBar() {
           {menuItems.map((item, index) => (
             <NavbarItem
               key={`${item}-${index}`}
-              isActive={
-                pathname === `/${item.toLocaleLowerCase()}` ? true : false
-              }>
+              isActive={pathname === `/${item.toLocaleLowerCase()}`}>
               <Link
                 href={`/${item.toLocaleLowerCase()}`}
                 className={clsx(
@@ -87,9 +85,7 @@ export default function AppBar() {
           {menuItems.map((item, index) => (
             <NavbarMenuItem
               key={`${item}-${index}`}
-              isActive={
-                pathname === `/${item.toLocaleLowerCase()}` ? true : false
-              }>
+              isActive={pathname === `/${item.toLocaleLowerCase()}`}>
               <Link
                 href={`/${item.toLocaleLowerCase()}`}
                 onClick={() => setIsMenuOpen(false)}

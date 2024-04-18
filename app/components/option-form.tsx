@@ -1,42 +1,34 @@
 "use client";
-import { ChangeEvent, useState } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { addOption } from "@/lib/optionsSlice";
 import { deleteIdx, toggleIsDisabled } from "@/lib/randomSlice";
-import { selectRandomIdx } from "@/lib/selectors";
+import { selectOptions, selectRandomIdx } from "@/lib/selectors";
+import { useOptionForm } from "@/hooks/useOptionsForm";
 
 export function OptionForm() {
-  const [value, setValue] = useState("");
-  const [isInvalid, setIsInvalid] = useState(false);
+  const { value, isInvalid, handleChange, handleSubmit, setIsInvalid } =
+    useOptionForm({
+      onSubmit: () => {
+        if (randomIndex !== null) {
+          dispatch(deleteIdx());
+          dispatch(toggleIsDisabled(false));
+        }
+
+        dispatch(addOption(value.trim()));
+      },
+    });
+
   const dispatch = useAppDispatch();
   const randomIndex = useAppSelector(selectRandomIdx);
-
-  const handleSubmit = (event: ChangeEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const text = form.elements.namedItem("text") as HTMLInputElement;
-    if (!text.value) {
-      return setIsInvalid(true);
-    } else {
-      setIsInvalid(false);
-    }
-
-    if (randomIndex !== null) {
-      dispatch(deleteIdx());
-      dispatch(toggleIsDisabled(false));
-    }
-
-    dispatch(addOption(text.value));
-    form.reset();
-  };
+  const options = useAppSelector(selectOptions);
 
   return (
     <form
-      className='flex items-center justify-center gap-4 mb-6'
-      onSubmit={handleSubmit}>
+      className='flex flex-col md:flex-row items-center justify-center gap-4 mb-6'
+      onSubmit={handleSubmit(options)}>
       <Input
-        className=''
+        className='md:mr-6 md:mb-0 mb-6'
         type='text'
         name='text'
         label='Enter your option'
@@ -44,8 +36,12 @@ export function OptionForm() {
         variant='underlined'
         isClearable
         isInvalid={isInvalid}
-        errorMessage={isInvalid && "That's not serious, write something"}
-        onValueChange={setValue}
+        onClear={() => setIsInvalid(false)}
+        errorMessage={
+          isInvalid &&
+          "That's not serious, option has to be unique and not empty"
+        }
+        onValueChange={handleChange}
         value={value}
       />
       <Button
@@ -53,7 +49,9 @@ export function OptionForm() {
         radius='full'
         size='md'
         variant='ghost'
-        color='primary'>
+        color='primary'
+        className='px-10'
+        isDisabled={isInvalid}>
         Add
       </Button>
     </form>

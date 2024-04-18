@@ -18,10 +18,10 @@ export default function Page() {
       </div>
       <div>
         <Link href='/listo' className='btn red'>
-          Click me
+          Red pill btn
         </Link>
         <Link href='/blue-pill' className='btn blue'>
-          Click me
+          Blue pill btn
         </Link>
       </div>
     </div>
