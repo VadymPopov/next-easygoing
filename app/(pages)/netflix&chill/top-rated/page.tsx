@@ -6,7 +6,7 @@ import { selectTopRatedMovie } from "@/lib/selectors";
 import {
   fetchInitialMovie,
   fetchMovieDetailsById,
-  getMovieTrailerById,
+  fetchMovieTrailerById,
 } from "@/lib/operations";
 import { useEffect } from "react";
 
@@ -31,7 +31,7 @@ export default function Page() {
   useEffect(() => {
     if (movie.id) {
       dispatch(fetchMovieDetailsById({ id: movie.id, type: "top-rated" }));
-      dispatch(getMovieTrailerById({ id: movie.id, type: "top-rated" }));
+      dispatch(fetchMovieTrailerById({ id: movie.id, type: "top-rated" }));
     }
   }, [dispatch, movie]);
 

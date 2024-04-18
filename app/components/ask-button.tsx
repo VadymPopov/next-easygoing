@@ -2,11 +2,11 @@
 import React from "react";
 import { Button } from "@nextui-org/react";
 
-type AskButtonProps = {
+interface AskButtonProps {
   isDisabled: boolean;
   onClick?: () => void;
   type: "button" | "submit" | "reset" | undefined;
-};
+}
 
 export default function AskButton({
   isDisabled,

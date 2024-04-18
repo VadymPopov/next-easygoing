@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { selectAllGenres } from "@/lib/selectors";
-import { getGenres } from "@/lib/operations";
+import { fetchGenres } from "@/lib/operations";
 
 export function useGenreSelection() {
   const dispatch = useAppDispatch();
@@ -9,7 +9,7 @@ export function useGenreSelection() {
 
   useEffect(() => {
     if (genresArray.length === 0) {
-      dispatch(getGenres());
+      dispatch(fetchGenres());
     }
   }, [dispatch, genresArray]);
 

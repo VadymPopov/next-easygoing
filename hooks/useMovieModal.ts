@@ -7,20 +7,7 @@ import {
   selectTopRatedMovieDetails,
   selectTopRatedTrailerKey,
 } from "@/lib/selectors";
-
-type MovieDetailsType = {
-  backdrop_path: string;
-  genres: Array<{ id: string; name: string }>;
-  overview: string;
-  poster_path: string;
-  release_date: string;
-  tagline: string;
-  vote_average: number;
-  vote_count: number;
-  production_countries: Array<{ iso_3166_1: string }>;
-  runtime: number;
-  title: string;
-};
+import { MovieDetailsType } from "@/types/movieTypes";
 
 export function useMovieModal(type: "oracle" | "top-rated") {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

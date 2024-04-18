@@ -1,48 +1,54 @@
 import { getRandomNumber } from "@/helpers/random";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  getGenres,
+  fetchGenres,
   fetchInitialMovie,
   fetchMoviesByGenreAndYear,
   fetchTotalPagesByGenreAndYear,
   fetchMovieDetailsById,
-  getMovieTrailerById,
+  fetchMovieTrailerById,
   fetchTopRatedMovies,
 } from "./operations";
+import { MovieState } from "@/types/movieTypes";
 
-const initialYear = new Date().getFullYear().toString();
+const initialYear: string = new Date().getFullYear().toString();
 
-const handlePending = (state) => {
+const initialState: MovieState = {
+  topRatedPage: {
+    movie: {},
+    movieDetails: {},
+    trailerKey: "",
+  },
+  oraclePage: {
+    movie: {},
+    movieDetails: {},
+    trailerKey: "",
+    totalPages: null,
+    selectedGenres: "",
+    selectedYear: initialYear,
+  },
+  randomPage: 1,
+  randomIdx: 1,
+  genres: [],
+  isLoading: false,
+  error: null,
+};
+
+const handlePending = (state: MovieState) => {
   state.isLoading = true;
 };
 
-const handleRejected = (state, action) => {
+const handleRejected = (
+  state: MovieState,
+  action: PayloadAction<string | undefined>
+) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.error = action.payload as string | null;
 };
 
 const moviesSlice = createSlice({
   name: "movies",
-  initialState: {
-    topRatedPage: {
-      movie: {},
-      movieDetails: {},
-      trailerKey: "",
-    },
-    oraclePage: {
-      movie: {},
-      movieDetails: {},
-      trailerKey: "",
-      totalPages: null,
-      selectedGenres: "",
-      selectedYear: initialYear,
-    },
-    randomPage: 1,
-    randomIdx: 1,
-    genres: [],
-    isLoading: false,
-    error: null,
-  },
+  initialState: initialState,
   reducers: {
     addSelectedGenres(state, action: PayloadAction<string>) {
       state.oraclePage.selectedGenres = action.payload;
@@ -59,13 +65,13 @@ const moviesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getGenres.pending, handlePending)
-      .addCase(getGenres.fulfilled, (state, action) => {
+      .addCase(fetchGenres.pending, handlePending)
+      .addCase(fetchGenres.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.genres = action.payload;
       })
-      .addCase(getGenres.rejected, handleRejected)
+      .addCase(fetchGenres.rejected, handleRejected)
       .addCase(fetchInitialMovie.pending, handlePending)
       .addCase(fetchInitialMovie.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -107,8 +113,8 @@ const moviesSlice = createSlice({
         }
       })
       .addCase(fetchMovieDetailsById.rejected, handleRejected)
-      .addCase(getMovieTrailerById.pending, handlePending)
-      .addCase(getMovieTrailerById.fulfilled, (state, action) => {
+      .addCase(fetchMovieTrailerById.pending, handlePending)
+      .addCase(fetchMovieTrailerById.fulfilled, (state, action) => {
         const trailer = action.payload.response.find(
           (e) => e.type === "Trailer"
         );
@@ -120,7 +126,7 @@ const moviesSlice = createSlice({
           state.topRatedPage.trailerKey = trailer ? trailer.key : "";
         }
       })
-      .addCase(getMovieTrailerById.rejected, handleRejected)
+      .addCase(fetchMovieTrailerById.rejected, handleRejected)
       .addCase(fetchTopRatedMovies.pending, handlePending)
       .addCase(fetchTopRatedMovies.fulfilled, (state, action) => {
         state.isLoading = false;

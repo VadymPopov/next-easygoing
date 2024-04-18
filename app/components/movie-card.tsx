@@ -2,11 +2,11 @@
 import { Card, CardFooter, Image, CardBody } from "@nextui-org/react";
 import MovieModal from "./modal";
 
-type MovieCardProps = {
+interface MovieCardProps {
   title: string;
   poster: string;
   type: "oracle" | "top-rated";
-};
+}
 
 export default function MovieCard({ title, poster, type }: MovieCardProps) {
   return (

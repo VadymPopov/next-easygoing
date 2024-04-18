@@ -32,10 +32,7 @@ const useNumberForm = ({ onSubmit, onChange }: UseNumberFormProps) => {
       ...prevValues,
       [name]: value,
     }));
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: null,
-    }));
+    setErrors({ minValue: null, maxValue: null });
     onChange();
   };
 

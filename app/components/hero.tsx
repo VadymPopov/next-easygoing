@@ -1,7 +1,7 @@
-type HeroProps = {
+interface HeroProps {
   title: string;
   text: string;
-};
+}
 
 export default function Hero({ title, text }: HeroProps) {
   return (

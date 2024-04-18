@@ -9,10 +9,10 @@ import { useGenreSelection } from "@/hooks/useGenreSelection";
 import { useYearSelection } from "@/hooks/useYearSelection";
 import { useMovieFetch } from "@/hooks/useMovieFetch";
 
-type Genre = {
+interface Genre {
   id: number;
   name: string;
-};
+}
 
 export default function MovieForm() {
   const { genresArray } = useGenreSelection();

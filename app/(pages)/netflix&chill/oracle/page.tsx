@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import {
   fetchInitialMovie,
   fetchMovieDetailsById,
-  getMovieTrailerById,
+  fetchMovieTrailerById,
 } from "@/lib/operations";
 import { selectOracleMovie } from "@/lib/selectors";
 
@@ -27,7 +27,7 @@ export default function Page() {
   useEffect(() => {
     if (movie && movie.id) {
       dispatch(fetchMovieDetailsById({ id: movie.id, type: "oracle" }));
-      dispatch(getMovieTrailerById({ id: movie.id, type: "oracle" }));
+      dispatch(fetchMovieTrailerById({ id: movie.id, type: "oracle" }));
     }
   }, [dispatch, movie]);
 

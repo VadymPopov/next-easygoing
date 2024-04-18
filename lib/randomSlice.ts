@@ -19,13 +19,13 @@ const randomSlice = createSlice({
     addNumber(state, action: PayloadAction<number>) {
       state.randomNumber = action.payload;
     },
-    deleteNumber(state, action: PayloadAction) {
+    deleteNumber(state) {
       state.randomNumber = null;
     },
     addIdx(state, action: PayloadAction<number>) {
       state.randomIdx = action.payload;
     },
-    deleteIdx(state, action: PayloadAction) {
+    deleteIdx(state) {
       state.randomIdx = null;
     },
     toggleIsDisabled(state, action: PayloadAction<boolean>) {

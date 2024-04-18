@@ -7,16 +7,6 @@ interface Option {
 
 interface OptionsState extends Array<Option> {}
 
-interface AddOptionAction {
-  type: string;
-  payload: Option;
-}
-
-interface DeleteOptionAction {
-  type: string;
-  payload: string;
-}
-
 const initialState: OptionsState = [];
 
 const optionsSlice = createSlice({
