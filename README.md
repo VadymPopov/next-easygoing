@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# EasyGoing
 
-## Getting Started
+Welcome to EasyGoing, your go-to web application for making daily decisions easier! In today's fast-paced world, we are often overloaded with choices and sometimes struggle to decide what to do. EasyGoing is here to help you with that.
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+EasyGoing consists of three main pages: Listo, Nums, and Netflix&Chill. Each page serves a different purpose but shares the common goal of helping you make decisions effortlessly.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Listo
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Listo is where you can write down your options when you're faced with a decision. Whether it's choosing what to eat for dinner, which movie to watch, or where to go on vacation, Listo allows you to jot down all your choices. Then, the Oracle, inspired by The Matrix movie theme, will randomly pick one for you. Let the Oracle guide your decision-making process!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Nums
 
-## Learn More
+Similar to Listo, Nums helps you make decisions by selecting a random number from a specified range. Whether you're deciding how many chapters to read, how many minutes to spend exercising, or anything else that requires a numerical choice, Nums has got you covered. Simply set the range, and let the Oracle choose a number for you.
 
-To learn more about Next.js, take a look at the following resources:
+### Netflix&Chill
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Are you tired of the classic back-and-forth of "What should we watch tonight?" "I don't know, what do you want?" Netflix&Chill is here to rescue you from that dilemma. This page offers two options:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Random Movie by Genre and Year:** Let the Oracle randomly select a movie for you based on the chosen genre and year.
+2. **Random Top Rated Movie:** Alternatively, you can opt for the Oracle to pick a top-rated movie at random.
 
-## Deploy on Vercel
+With Netflix&Chill, you can spend less time deciding and more time enjoying your movie night.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies Used
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+EasyGoing is built using modern web technologies to ensure a seamless user experience. Here are the key technologies used:
+
+- **Next.js**: EasyGoing is built on Next.js, a React framework for building server-side rendered and static web applications.
+- **Next UI**: Next UI provides a set of ready-to-use UI components to streamline the development process.
+- **Tailwind CSS**: EasyGoing utilizes Tailwind CSS for styling, allowing for rapid UI development with utility-first CSS classes.
+- **TypeScript (TS)**: TypeScript is used for static typing and enhanced code readability, providing a more robust development experience.
+- **Redux**: Redux is employed for state management, ensuring a predictable state container for JavaScript apps.
+- **React Hot Toast**: React Hot Toast is used for displaying notifications to the user, enhancing the user experience.
+- **Next Themes**: Next Themes is used to manage themes and provide a customizable appearance for EasyGoing.
+- **clsx**: clsx is utilized for conditional CSS class generation, enabling dynamic styling based on component state.
+- **React Confetti**: React Confetti adds a fun element to the user experience by displaying confetti animations for celebrations and positive feedback.
+
+## Installation
+
+To install EasyGoing locally and start making decisions effortlessly, follow these steps:
+
+1. Clone the [EasyGoing GitHub repository](https://github.com/VadymPopov/next-easygoing).
+2. Navigate to the project directory.
+3. Run `npm install` to install the project dependencies.
+4. After installation, run `npm run dev` to start the development server.
+5. Open your browser and visit `http://localhost:3000` to access EasyGoing.
+
+Enjoy using EasyGoing and simplify your decision-making process today!
