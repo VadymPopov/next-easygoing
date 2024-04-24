@@ -47,25 +47,35 @@ export interface FetchInitialMovieArgs {
   query: string;
   year: string;
   type: string;
+  locale: string;
 }
 
 export interface FetchMoviesByGenreAndYearArgs {
   genres: string;
   year: string;
   page: string;
+  locale: string;
+}
+
+export interface fetchTopRatedMoviesArgs {
+  randomPage: string;
+  locale: string;
 }
 
 export interface FetchMovieDetailsByIdArgs {
   id: string;
   type: string;
+  locale: string;
 }
 
 export interface FetchMovieTrailerByIdArgs {
   id: string;
   type: string;
+  locale: string;
 }
 
 export interface FetchTotalPagesByGenreAndYearArgs {
   genres: string;
   year: string;
+  locale: string;
 }

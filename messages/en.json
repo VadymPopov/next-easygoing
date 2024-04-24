@@ -1,0 +1,99 @@
+{
+  "Home": {
+    "title": "Choose wisely",
+    "text-one": "“You take the",
+    "span-one": "blue pill",
+    "text-two": ", the story ends, you wake up in your bed and believe whatever you want to believe. You take the",
+    "span-two": "red pill",
+    "text-three": ", you stay in wonderland, and I show you how deep the rabbit hole goes.”"
+  },
+  "Blue": {
+    "title": "You made the right choice, didn't you?",
+    "text": "“Here is only one way out, take the",
+    "span": "red pill"
+  },
+  "Listo": {
+    "title": "Struggling with decisions?",
+    "text": "Whether it's picking a team to win or planning a date or the classic back-and-forth of \"Where should we go?\" \"I don't know, what about you?\". We've got you covered.",
+    "stepOne": "Write your option in the input field, then click the \"Add\" button. Don't worry, options can always be removed if necessary.",
+    "stepTwo": "Repeat the first step for each option you want to add. Finished? Move on to the last step.",
+    "stepThree": "Click the \"Ask the Oracle\" button. It's easy, isn't it?"
+  },
+  "Nums": {
+    "title": "Do you believe in the magic of numbers?",
+    "text": "Our lives are filled with countless choices. An average adult makes about 35,000 remotely conscious decisions each day. Factors such as stress, fatigue, and time pressure can influence the number and quality of decisions made in a day.",
+    "stepOne": "Enter the initial value in the minimum value field. It can be zero but must be less than the maximum value.",
+    "stepTwo": "Enter the initial value in the maximum value field. It must be greater than the minimum value.",
+    "stepThree": "Click the \"Ask the Oracle\" button. It's easy, isn't it?"
+  },
+  "Netflix": {
+    "title": "What's on Tonight? Let's Decide Together!",
+    "text": "Classic back-and-forth of \"What should we watch tonight?\" \"I don't know, what do you want?\"",
+    "stepOne": "On this page, you have two options to choose from: the Oracle's Choice and Top Rated. Decide how you want to search for a movie today.",
+    "stepTwo": "Oracle's Choice: Select one or more genres, or leave the field empty for a genreless search. Then, enter the release year of the films. For Top Rated, simply proceed to the next step.",
+    "stepThree": "Click the \"Ask the Oracle\" button, and don't forget to read the movie details!"
+  },
+  "Steps": {
+    "steps-title": "Steps",
+    "steps-title-two": "to take",
+    "step": "Step"
+  },
+  "OptionForm": {
+    "label": "Enter your option",
+    "errorMessage": "That's not serious, option has to be unique and not empty",
+    "button": "Add"
+  },
+  "OptionList": {
+    "listTitle": "Options to choose from",
+    "toastOne": "the Oracle sees you",
+    "toastTwo": "You are really think that you can cheat?!",
+    "toastThree": "I know you better then this",
+    "toastFour": "Change the list if you want one more try...",
+    "toastFive": "Dont upset me anymore",
+    "toastSix": "I am watching you"
+  },
+  "NumberForm": {
+    "labelMin": "Enter minimum value",
+    "labelMax": "Enter maximum value",
+    "toastOne": "Are you serious???",
+    "toastTwo": "Again?!",
+    "toastThree": "I know you better then this",
+    "toastFour": "Change the numbers if you want one more try...",
+    "toastFive": "Be smarter next time",
+    "toastSix": "I am always watching you",
+    "errorMin": "Minimum value should be less than maximum value",
+    "errorMex": "Maximum value should be greater than minimum value"
+  },
+  "AskButton": {
+    "button": "Ask the Oracle"
+  },
+  "MovieForm": {
+    "labelOne": "Select the genre",
+    "labelTwo": "Enter the year"
+  },
+  "MovieNavbar": {
+    "oracle": "the Oracle's choice",
+    "topRated": "Top Rated"
+  },
+  "Languages": {
+    "en": "English",
+    "es": "Spanish",
+    "uk": "Ukrainian"
+  },
+  "AppBar": {
+    "listo": "Listo",
+    "nums": "Nums",
+    "movies": "Netflix&Chill"
+  },
+  "Modal": {
+    "details": "Details",
+    "rating": "Rating",
+    "genre": "Genre",
+    "date": "Release Date",
+    "time": "Time",
+    "country": "Country",
+    "about": "About",
+    "close": "Close",
+    "watch": "Watch trailer"
+  }
+}

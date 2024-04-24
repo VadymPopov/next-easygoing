@@ -5,6 +5,7 @@ import { addOption } from "@/lib/optionsSlice";
 import { deleteIdx, toggleIsDisabled } from "@/lib/randomSlice";
 import { selectOptions, selectRandomIdx } from "@/lib/selectors";
 import { useOptionForm } from "@/hooks/useOptionsForm";
+import { useTranslations } from "next-intl";
 
 export function OptionForm() {
   const { value, isInvalid, handleChange, handleSubmit, setIsInvalid } =
@@ -22,6 +23,7 @@ export function OptionForm() {
   const dispatch = useAppDispatch();
   const randomIndex = useAppSelector(selectRandomIdx);
   const options = useAppSelector(selectOptions);
+  const t = useTranslations("OptionForm");
 
   return (
     <form
@@ -31,16 +33,13 @@ export function OptionForm() {
         className='md:mr-6 md:mb-0 mb-6'
         type='text'
         name='text'
-        label='Enter your option'
+        label={t("label")}
         labelPlacement='outside'
         variant='underlined'
         isClearable
         isInvalid={isInvalid}
         onClear={() => setIsInvalid(false)}
-        errorMessage={
-          isInvalid &&
-          "That's not serious, option has to be unique and not empty"
-        }
+        errorMessage={isInvalid && t("errorMessage")}
         onValueChange={handleChange}
         value={value}
       />
@@ -52,7 +51,7 @@ export function OptionForm() {
         color='primary'
         className='px-10'
         isDisabled={isInvalid}>
-        Add
+        {t("button")}
       </Button>
     </form>
   );

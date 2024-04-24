@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+
 import {
   FetchInitialMovieArgs,
   FetchMovieDetailsByIdArgs,
@@ -9,6 +10,7 @@ import {
   Genre,
   Movie,
   MovieDetailsType,
+  fetchTopRatedMoviesArgs,
 } from "@/types/movieTypes";
 
 const KEY =
@@ -24,13 +26,15 @@ const axiosInstance = axios.create({
 
 export const fetchGenres = createAsyncThunk<
   Genre[],
-  void,
+  string,
   {
     rejectValue: string;
   }
->("movies/fetchGenres", async (_, thunkAPI) => {
+>("movies/fetchGenres", async (locale, thunkAPI) => {
   try {
-    const response = await axiosInstance.get("/genre/movie/list");
+    const response = await axiosInstance.get(
+      `/genre/movie/list?language=${locale}`
+    );
     return response.data.genres;
   } catch (e) {
     const error = e as AxiosError;
@@ -44,10 +48,10 @@ export const fetchInitialMovie = createAsyncThunk<
   {
     rejectValue: string;
   }
->("movies/initialMovie", async ({ query, year, type }, thunkAPI) => {
+>("movies/initialMovie", async ({ query, year, type, locale }, thunkAPI) => {
   try {
     const response = await axiosInstance.get(
-      `/search/movie?query=${query}&year=${year}`
+      `/search/movie?query=${query}&year=${year}&language=${locale}`
     );
     return { response: response.data.results[0], type };
   } catch (e) {
@@ -64,11 +68,10 @@ export const fetchMoviesByGenreAndYear = createAsyncThunk<
   }
 >(
   "movies/moviesByGenreAndYear",
-  async (data: { genres: string; year: string; page: string }, thunkAPI) => {
-    const { genres, year, page } = data;
+  async ({ genres, year, page, locale }, thunkAPI) => {
     const queryStr = genres
-      ? `/discover/movie?with_genres=${genres}&year=${year}&page=${page}&language=en-US`
-      : `/discover/movie?year=${year}&page=${page}&language=en-US`;
+      ? `/discover/movie?with_genres=${genres}&year=${year}&page=${page}&language=${locale}`
+      : `/discover/movie?year=${year}&page=${page}&language=${locale}`;
     try {
       const response = await axiosInstance.get(queryStr);
       return response.data.results;
@@ -81,12 +84,12 @@ export const fetchMoviesByGenreAndYear = createAsyncThunk<
 
 export const fetchTopRatedMovies = createAsyncThunk<
   Movie[],
-  string,
+  fetchTopRatedMoviesArgs,
   {
     rejectValue: string;
   }
->("movies/topRatedMovies", async (randomPage: string, thunkAPI) => {
-  const queryStr = `/movie/top_rated?&page=${randomPage}&language=en-US`;
+>("movies/topRatedMovies", async ({ randomPage, locale }, thunkAPI) => {
+  const queryStr = `/movie/top_rated?&page=${randomPage}&language=${locale}`;
   try {
     const response = await axiosInstance.get(queryStr);
     return response.data.results;
@@ -102,9 +105,9 @@ export const fetchMovieDetailsById = createAsyncThunk<
   {
     rejectValue: string;
   }
->("movies/movieDetailsById", async ({ id, type }, thunkAPI) => {
+>("movies/movieDetailsById", async ({ id, type, locale }, thunkAPI) => {
   try {
-    const response = await axiosInstance.get(`/movie/${id}?language=en-US`);
+    const response = await axiosInstance.get(`/movie/${id}?language=${locale}`);
     return { response: response.data, type };
   } catch (e) {
     const error = e as AxiosError;
@@ -118,10 +121,10 @@ export const fetchMovieTrailerById = createAsyncThunk<
   {
     rejectValue: string;
   }
->("movies/movieTrailerById", async ({ id, type }, thunkAPI) => {
+>("movies/movieTrailerById", async ({ id, type, locale }, thunkAPI) => {
   try {
     const response = await axiosInstance.get(
-      `/movie/${id}/videos?language=en-US`
+      `/movie/${id}/videos?language=${locale}`
     );
     return { response: response.data.results, type };
   } catch (e) {
@@ -136,15 +139,18 @@ export const fetchTotalPagesByGenreAndYear = createAsyncThunk<
   {
     rejectValue: string;
   }
->("movies/totalPagesByGenreAndYear", async ({ genres, year }, thunkAPI) => {
-  const queryStr = genres
-    ? `/discover/movie?with_genres=${genres}&year=${year}&language=en-US`
-    : `/discover/movie?year=${year}&language=en-US`;
-  try {
-    const response = await axiosInstance.get(queryStr);
-    return response.data.total_pages;
-  } catch (e) {
-    const error = e as AxiosError;
-    return thunkAPI.rejectWithValue(error.message);
+>(
+  "movies/totalPagesByGenreAndYear",
+  async ({ genres, year, locale }, thunkAPI) => {
+    const queryStr = genres
+      ? `/discover/movie?with_genres=${genres}&year=${year}&language=${locale}`
+      : `/discover/movie?year=${year}&language=${locale}`;
+    try {
+      const response = await axiosInstance.get(queryStr);
+      return response.data.total_pages;
+    } catch (e) {
+      const error = e as AxiosError;
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);

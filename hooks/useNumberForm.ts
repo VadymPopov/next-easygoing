@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface FormValues {
   minValue: string;
@@ -20,6 +21,7 @@ const useNumberForm = ({ onSubmit, onChange }: UseNumberFormProps) => {
     minValue: "",
     maxValue: "",
   });
+  const t = useTranslations("NumberForm");
 
   const [errors, setErrors] = useState<FormErrors>({
     minValue: null,
@@ -41,11 +43,11 @@ const useNumberForm = ({ onSubmit, onChange }: UseNumberFormProps) => {
     const minNumber = parseInt(values.minValue, 10);
     const maxNumber = parseInt(values.maxValue, 10);
 
-    if (minNumber >= maxNumber) {
+    if (minNumber >= maxNumber || isNaN(minNumber) || isNaN(maxNumber)) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        minValue: "Minimum value should be less than maximum value",
-        maxValue: "Maximum value should be greater than minimum value",
+        minValue: t("errorMin"),
+        maxValue: t("errorMax"),
       }));
       return;
     }

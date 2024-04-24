@@ -9,6 +9,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useMovieModal } from "@/hooks/useMovieModal";
+import { useTranslations } from "next-intl";
 
 interface MovieModalProps {
   type: "oracle" | "top-rated";
@@ -17,6 +18,7 @@ interface MovieModalProps {
 export default function MovieModal({ type }: MovieModalProps) {
   const { isOpen, onOpen, onOpenChange, trailerKey, movieDetails } =
     useMovieModal(type);
+  const t = useTranslations("Modal");
 
   const {
     backdrop_path,
@@ -45,7 +47,7 @@ export default function MovieModal({ type }: MovieModalProps) {
         size='sm'
         className='text-tiny text-white bg-black/20'
         onPress={onOpen}>
-        Details
+        {t("details")}
       </Button>
       <Modal
         isOpen={isOpen}
@@ -82,7 +84,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                       {vote_average !== 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                            Rating
+                            {t("rating")}
                           </td>
                           <td>
                             <span className='px-2 py-1 text-white bg-orange-500 rounded-xl'>
@@ -96,7 +98,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                       {genres && genres.length > 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                            Genre
+                            {t("genre")}
                           </td>
                           <td>
                             {genres.map((genre) => genre.name).join(", ")}
@@ -106,7 +108,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                       {release_date && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                            Release Date
+                            {t("date")}
                           </td>
                           <td>{release_date}</td>
                         </tr>
@@ -114,7 +116,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                       {runtime !== 0 && (
                         <tr>
                           <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                            Time
+                            {t("time")}
                           </td>
                           <td>{runtime} min</td>
                         </tr>
@@ -124,7 +126,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                         production_countries.length > 0 && (
                           <tr>
                             <td className='text-gray-300 pr-8 whitespace-no-wrap'>
-                              Country
+                              {t("country")}
                             </td>
                             <td>
                               {production_countries
@@ -137,7 +139,7 @@ export default function MovieModal({ type }: MovieModalProps) {
                   </table>
                   {overview && (
                     <>
-                      <h3 className='text-lg'>About</h3>
+                      <h3 className='text-lg'>{t("about")}</h3>
                       <p className='text-justify'>{overview}</p>
                     </>
                   )}
@@ -145,11 +147,11 @@ export default function MovieModal({ type }: MovieModalProps) {
               </ModalBody>
               <ModalFooter>
                 <Button color='danger' variant='light' onPress={onClose}>
-                  Close
+                  {t("close")}
                 </Button>
                 {trailerKey && (
                   <Button color='primary' onPress={handleBtnClick}>
-                    Watch Trailer
+                    {t("watch")}
                   </Button>
                 )}
               </ModalFooter>

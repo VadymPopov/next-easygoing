@@ -12,6 +12,7 @@ import { getRandomNumber } from "@/helpers/random";
 import { addIdx, toggleIsDisabled } from "@/lib/randomSlice";
 import { useEffect, useState } from "react";
 import { showToast } from "@/helpers/toast";
+import { useTranslations } from "next-intl";
 
 export type OptionsType = {
   text: string;
@@ -25,6 +26,7 @@ export function OptionList() {
   const options = useAppSelector(selectOptions);
   const randomIndex = useAppSelector(selectRandomIdx);
   const isDisabled = useAppSelector(selectIsDisabled);
+  const t = useTranslations("OptionList");
 
   useEffect(() => {
     if (shouldUnmount) {
@@ -44,12 +46,12 @@ export function OptionList() {
 
   const handleBtnClick = () => {
     if (randomIndex !== null) {
-      showToast("the Oracle sees you", 300, 3000);
-      showToast("You are really think that you can cheat?!", 1000, 3500);
-      showToast("I know you better then this", 1400, 3000);
-      showToast("Change the list if you want one more try...", 1800, 5000);
-      showToast("Dont upset me anymore", 2000, 3500);
-      showToast("I am watching you", 2200, 3200);
+      showToast(t("toastOne"), 300, 3000);
+      showToast(t("toastTwo"), 1000, 3500);
+      showToast(t("toastThree"), 1400, 3000);
+      showToast(t("toastFour"), 1800, 5000);
+      showToast(t("toastFive"), 2000, 3500);
+      showToast(t("toastSix"), 2200, 3200);
       dispatch(toggleIsDisabled(true));
       return;
     }
@@ -64,7 +66,7 @@ export function OptionList() {
       <ul className='mb-6'>
         {options.length > 0 && (
           <p className='text-lg flex items-center justify-end gap-4 mb-6 font-semibold'>
-            Options to choose from{" "}
+            {t("listTitle")}
             <span className='text-2xl'>{options.length}</span>
           </p>
         )}

@@ -9,6 +9,7 @@ import { selectRandomNumber } from "@/lib/selectors";
 import { getRandomIntInclusive } from "@/helpers/random";
 import { showToast } from "@/helpers/toast";
 import useNumberForm from "@/hooks/useNumberForm";
+import { useTranslations } from "next-intl";
 
 export default function NumberForm() {
   const [shouldUnmount, setShouldUnmount] = useState<boolean>(false);
@@ -17,16 +18,17 @@ export default function NumberForm() {
 
   const randomNumber = useAppSelector(selectRandomNumber);
   const dispatch = useAppDispatch();
+  const t = useTranslations("NumberForm");
 
   const { values, errors, handleChange, handleSubmit } = useNumberForm({
     onSubmit: (minValue, maxValue) => {
       if (randomNumber !== null) {
-        showToast("Are you serious???", 300, 3000);
-        showToast("Again?!", 1000, 3500);
-        showToast("I know you better then this", 1400, 3000);
-        showToast("Change the numbers if you want one more try...", 1800, 5000);
-        showToast("Be smarter next time", 2000, 3500);
-        showToast("I am always watching you", 2200, 3200);
+        showToast(t("toastOne"), 300, 3000);
+        showToast(t("toastTwo"), 1000, 3500);
+        showToast(t("toastThree"), 1400, 3000);
+        showToast(t("toastFour"), 1800, 5000);
+        showToast(t("toastFive"), 2000, 3500);
+        showToast(t("toastSix"), 2200, 3200);
         setIsDisabled(true);
         return;
       }
@@ -70,7 +72,7 @@ export default function NumberForm() {
             name='minValue'
             step={1}
             min={0}
-            label='Enter minimum value'
+            label={t("labelMin")}
             labelPlacement='outside'
             variant='underlined'
             isInvalid={!!errors.minValue}
@@ -83,7 +85,7 @@ export default function NumberForm() {
             name='maxValue'
             step={1}
             min={0}
-            label='Enter maximum value'
+            label={t("labelMax")}
             labelPlacement='outside'
             variant='underlined'
             isInvalid={!!errors.maxValue}

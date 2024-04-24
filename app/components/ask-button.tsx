@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@nextui-org/react";
+import { useTranslations } from "next-intl";
 
 interface AskButtonProps {
   isDisabled: boolean;
@@ -13,6 +14,7 @@ export default function AskButton({
   onClick,
   type,
 }: AskButtonProps) {
+  const t = useTranslations("AskButton");
   return (
     <Button
       size='lg'
@@ -22,7 +24,7 @@ export default function AskButton({
       isDisabled={isDisabled}
       onClick={onClick}
       color='success'>
-      Ask the Oracle
+      {t("button")}
     </Button>
   );
 }

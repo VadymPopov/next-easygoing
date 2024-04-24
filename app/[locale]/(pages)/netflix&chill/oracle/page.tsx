@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import MovieForm from "@/app/components/movie-form";
 import MovieCard from "@/app/components/movie-card";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
+import { useLocale } from "next-intl";
 import {
   fetchInitialMovie,
   fetchMovieDetailsById,
@@ -13,23 +14,29 @@ import { selectOracleMovie } from "@/lib/selectors";
 export default function Page() {
   const dispatch = useAppDispatch();
   const movie = useAppSelector(selectOracleMovie);
+  const locale = useLocale();
 
   const { title, poster_path } = movie || {};
 
   useEffect(() => {
     if (movie && Object.keys(movie).length === 0) {
       dispatch(
-        fetchInitialMovie({ query: "The Matrix", year: "1999", type: "oracle" })
+        fetchInitialMovie({
+          query: "The Matrix",
+          year: "1999",
+          type: "oracle",
+          locale,
+        })
       );
     }
-  }, [dispatch, movie]);
+  }, [dispatch, movie, locale]);
 
   useEffect(() => {
     if (movie && movie.id) {
-      dispatch(fetchMovieDetailsById({ id: movie.id, type: "oracle" }));
-      dispatch(fetchMovieTrailerById({ id: movie.id, type: "oracle" }));
+      dispatch(fetchMovieDetailsById({ id: movie.id, type: "oracle", locale }));
+      dispatch(fetchMovieTrailerById({ id: movie.id, type: "oracle", locale }));
     }
-  }, [dispatch, movie]);
+  }, [dispatch, movie, locale]);
 
   return (
     <>

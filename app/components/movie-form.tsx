@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Input, Select, SelectItem, Selection } from "@nextui-org/react";
 import { useAppSelector } from "@/lib/hooks";
 import { selectIsLoading } from "@/lib/selectors";
+import { useTranslations } from "next-intl";
 
 import AskButton from "./ask-button";
 import { useGenreSelection } from "@/hooks/useGenreSelection";
@@ -20,13 +21,14 @@ export default function MovieForm() {
   const isLoading = useAppSelector(selectIsLoading);
   const [values, setValues] = useState<Selection>(new Set<number>([]));
   const { handleSubmit } = useMovieFetch(year, values);
+  const t = useTranslations("MovieForm");
 
   return (
     <>
       <form className='mb-6' onSubmit={handleSubmit}>
         <div className='flex md:flex-row flex-col items-center justify-center gap-4 mb-6'>
           <Select
-            label='Select the genre'
+            label={t("labelOne")}
             name='genres'
             selectionMode='multiple'
             className='max-w-md min-w-xs'
@@ -47,7 +49,7 @@ export default function MovieForm() {
             step={1}
             min={1888}
             max={new Date().getFullYear().toString()}
-            label='Enter the year'
+            label={t("labelTwo")}
             labelPlacement='outside'
             variant='underlined'
             onChange={handleChange}

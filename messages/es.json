@@ -1,0 +1,101 @@
+{
+  "Home": {
+    "title": "Elegir sabiamente",
+    "text-one": "“Te tomas la",
+    "span-one": "pastilla azul",
+    "text-two": ", la historia termina, te despiertas en tu cama y crees lo que quieras creer. Tomas la",
+    "span-two": "pastilla roja",
+    "text-three": ", te quedas en el país de las maravillas, y te muestro qué tan profundo es el agujero del conejo.”"
+  },
+  "Blue": {
+    "title": "Hiciste la elección correcta, ¿verdad?",
+    "text": "“Aquí solo hay una salida, toma la",
+    "span": "pastilla roja"
+  },
+  "Listo": {
+    "title": "¿Luchando con las decisiones?",
+    "text": "Ya sea elegir un equipo ganador o planificar una cita o el clásico ir y venir de \"¿A dónde deberíamos ir?\" , \"No lo sé, ¿y tú?\". Nosotros te tenemos cubierto.",
+    "stepOne": "Escribe tu opción en el campo de entrada y luego haz clic en el botón \"Añadir\". No te preocupes, las opciones siempre se pueden eliminar si es necesario.",
+    "stepTwo": "Repite el primer paso para cada opción que desees agregar. ¿Terminaste? Sigue con el último paso.",
+    "stepThree": "Haz clic en el botón \"Preguntar al Oráculo\". Es fácil, ¿no?"
+  },
+  "Nums": {
+    "title": "¿Crees en la magia de los números?",
+    "text": "Nuestras vidas están llenas de innumerables decisiones. Un adulto promedio toma alrededor de 35,000 decisiones conscientes cada día. Factores como el estrés, la fatiga y la presión del tiempo pueden influir en el número y la calidad de las decisiones tomadas en un día.",
+    "stepOne": "Ingrese el número en el campo de valor mínimo. Puede ser cero pero debe ser menor que el valor máximo.",
+    "stepTwo": "Ingrese el número  inicial en el campo del valor máximo. Debe ser mayor que el valor mínimo.",
+    "stepThree": "Haga clic en el botón \"Preguntar al Oráculo\". Pan comido, ¿verdad?"
+  },
+  "Netflix": {
+    "title": "¿Qué hay para ver esta noche?",
+    "text": "Clásico ir y venir de \"¿Qué deberíamos ver esta noche?\" \"No lo sé, ¿qué quieres tú?\"",
+    "stepOne": "En esta página, tienes dos opciones para elegir: la Elección del Oráculo y las Mejor Valoradas. Decide cómo quieres buscar una película hoy.",
+    "stepTwo": "Elección del Oráculo: selecciona uno o más géneros, o deja el campo vacío para una búsqueda sin género. Luego, ingresa el año de estreno de las películas. Para las Mejor Valoradas, simplemente procede al siguiente paso.",
+    "stepThree": "Haz clic en el botón \"Preguntar al Oráculo\" ¡y no olvides leer los detalles de la película!"
+  },
+  "Steps": {
+    "steps-title": "Pasos",
+    "steps-title-two": "a tomar",
+    "step": "Paso"
+  },
+  "OptionForm": {
+    "label": "Ingrese su opción",
+    "errorMessage": "Eso no es serio, la opción debe ser única y no estar vacía",
+    "button": "Añadir",
+    "listTitle": "Opciones para elegir"
+  },
+  "OptionList": {
+    "listTitle": "Opciones para elegir",
+    "toastOne": "el Oráculo te está viendo",
+    "toastTwo": "¿Realmente crees que puedes engañar?",
+    "toastThree": "Te conozco mejor que eso",
+    "toastFour": "Cambia la lista si quieres intentarlo de nuevo...",
+    "toastFive": "No me molestes más",
+    "toastSix": "Te estoy vigilando"
+  },
+  "NumberForm": {
+    "labelMin": "Ingrese el valor mínimo",
+    "labelMax": "Ingrese el valor máximo",
+    "toastOne": "¿Estás en serio???",
+    "toastTwo": "¿Otra vez?!",
+    "toastThree": "Te conozco mejor que eso",
+    "toastFour": "Cambia los números si quieres intentarlo de nuevo...",
+    "toastFive": "Sé más inteligente la próxima vez",
+    "toastSix": "Siempre te estoy observando",
+    "errorMin": "El valor mínimo debe ser menor que el valor máximo",
+    "errorMax": "El valor máximo debe ser mayor que el valor mínimo"
+  },
+
+  "AskButton": {
+    "button": "Preguntar al Oráculo"
+  },
+  "MovieForm": {
+    "labelOne": "Seleccione el género",
+    "labelTwo": "Ingrese el año"
+  },
+  "MovieNavbar": {
+    "oracle": "Elección del Oráculo",
+    "topRated": "Mejor Valoradas"
+  },
+  "Languages": {
+    "en": "Inglés",
+    "es": "Español",
+    "uk": "Ucraniano"
+  },
+  "AppBar": {
+    "listo": "Listado",
+    "nums": "Número",
+    "movies": "Películas"
+  },
+  "Modal": {
+    "details": "Detalles",
+    "rating": "Clasificación",
+    "genre": "Género",
+    "date": "Fecha de lanzamiento",
+    "time": "Hora",
+    "country": "País",
+    "about": "Descripción",
+    "close": "Cerrar",
+    "watch": "Ver tráiler"
+  }
+}

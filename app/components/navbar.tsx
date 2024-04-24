@@ -13,11 +13,18 @@ import {
 } from "@nextui-org/react";
 import Link from "next/link";
 import ThemeSwitcher from "./theme-switcher";
+import LanguageSwitcher from "./language-switcher";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function AppBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuItems = ["Listo", "Nums"];
+  const t = useTranslations("AppBar");
+  const menuItems = [
+    { path: "listo", name: t("listo") },
+    { path: "nums", name: t("nums") },
+  ];
   const pathname = usePathname();
+  const locale = useLocale();
 
   return (
     <>
@@ -30,32 +37,33 @@ export default function AppBar() {
           </NavbarBrand>
         </NavbarContent>
         <ThemeSwitcher />
+        <LanguageSwitcher />
 
         <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-          {menuItems.map((item, index) => (
+          {menuItems.map(({ path, name }, index) => (
             <NavbarItem
-              key={`${item}-${index}`}
-              isActive={pathname === `/${item.toLocaleLowerCase()}`}>
+              key={`${path}-${index}`}
+              isActive={pathname === `/${locale}/${path.toLocaleLowerCase()}`}>
               <Link
-                href={`/${item.toLocaleLowerCase()}`}
+                href={`/${locale}/${path.toLocaleLowerCase()}`}
                 className={clsx(
-                  pathname === `/${item.toLocaleLowerCase()}` &&
+                  pathname === `/${locale}/${path.toLocaleLowerCase()}` &&
                     "text-primary hover:text-primary",
                   "hover:text-secondary transition-colors"
                 )}>
-                {item}
+                {name}
               </Link>
             </NavbarItem>
           ))}
           <NavbarItem isActive={pathname.includes("/netflix&chill")}>
             <Link
-              href='/netflix&chill/oracle'
+              href={`/${locale}/netflix&chill/oracle`}
               className={clsx(
                 pathname.includes("/netflix&chill") &&
                   "text-primary hover:text-primary",
                 "hover:text-secondary transition-colors"
               )}>
-              Netflix&Chill
+              {t("movies")}
             </Link>
           </NavbarItem>
         </NavbarContent>
@@ -72,7 +80,7 @@ export default function AppBar() {
           />
           <NavbarBrand className='justify-end'>
             <Link
-              href='/'
+              href={`/${locale}/listo`}
               aria-current='page'
               onClick={() => setIsMenuOpen(false)}
               className='font-bold text-inherit'>
@@ -82,35 +90,36 @@ export default function AppBar() {
         </NavbarContent>
 
         <NavbarMenu className='flex justify-start items-center gap-6 pt-8'>
-          {menuItems.map((item, index) => (
+          {menuItems.map(({ path, name }, index) => (
             <NavbarMenuItem
-              key={`${item}-${index}`}
-              isActive={pathname === `/${item.toLocaleLowerCase()}`}>
+              key={`${path}-${index}`}
+              isActive={pathname === `/${locale}/${path.toLocaleLowerCase()}`}>
               <Link
-                href={`/${item.toLocaleLowerCase()}`}
+                href={`/${locale}/${path.toLocaleLowerCase()}`}
                 onClick={() => setIsMenuOpen(false)}
                 className={clsx(
-                  pathname === `/${item.toLocaleLowerCase()}` &&
+                  pathname === `/${locale}/${path.toLocaleLowerCase()}` &&
                     "text-primary hover:text-primary",
                   "hover:text-secondary transition-colors text-2xl"
                 )}>
-                {item}
+                {name}
               </Link>
             </NavbarMenuItem>
           ))}
           <NavbarMenuItem isActive={pathname.includes("/netflix&chill")}>
             <Link
-              href='/netflix&chill/oracle'
+              href={`/${locale}/netflix&chill/oracle`}
               onClick={() => setIsMenuOpen(false)}
               className={clsx(
                 pathname.includes("/netflix&chill") &&
                   "text-primary hover:text-primary",
                 "hover:text-secondary transition-colors text-2xl"
               )}>
-              Netflix&Chill
+              {t("movies")}
             </Link>
           </NavbarMenuItem>
           <ThemeSwitcher />
+          <LanguageSwitcher />
         </NavbarMenu>
       </Navbar>
     </>

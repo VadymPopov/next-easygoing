@@ -2,9 +2,12 @@
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 
 export default function MovieNavbar() {
   const pathname = usePathname();
+  const t = useTranslations("MovieNavbar");
+  const locale = useLocale();
 
   return (
     <Breadcrumbs
@@ -20,11 +23,13 @@ export default function MovieNavbar() {
           "data-[disabled=true]:border-default-400 data-[disabled=true]:bg-default-100",
         ],
       }}>
-      <BreadcrumbItem isCurrent={pathname === "/netflix&chill/oracle"}>
-        <Link href='/netflix&chill/oracle'>Oracle&apos;s choice</Link>
+      <BreadcrumbItem
+        isCurrent={pathname === `/${locale}/netflix&chill/oracle`}>
+        <Link href={`/${locale}/netflix&chill/oracle`}>{t("oracle")}</Link>
       </BreadcrumbItem>
-      <BreadcrumbItem isCurrent={pathname === "/netflix&chill/top-rated"}>
-        <Link href='/netflix&chill/top-rated'>Top Rated</Link>
+      <BreadcrumbItem
+        isCurrent={pathname === `/${locale}/netflix&chill/top-rated`}>
+        <Link href={`/${locale}/netflix&chill/top-rated`}>{t("topRated")}</Link>
       </BreadcrumbItem>
     </Breadcrumbs>
   );

@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useLocale } from "next-intl";
 import {
   selectGenres,
   selectYear,
@@ -24,17 +25,19 @@ export function useMovieFetch(year: string, values: Selection) {
   const selectedYear = useAppSelector(selectYear);
   const randomPage = useAppSelector(selectRandomPage);
   const totalPages = useAppSelector(selectTotalPages);
+  const locale = useLocale();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const data = {
-      genres: selectedGenres,
-      year: selectedYear,
-      page: randomPage,
-    };
-
-    dispatch(fetchMoviesByGenreAndYear(data));
-  }, [dispatch, selectedGenres, randomPage, selectedYear]);
+    dispatch(
+      fetchMoviesByGenreAndYear({
+        genres: selectedGenres,
+        year: selectedYear,
+        page: randomPage,
+        locale,
+      })
+    );
+  }, [dispatch, selectedGenres, randomPage, selectedYear, locale]);
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,7 +47,7 @@ export function useMovieFetch(year: string, values: Selection) {
     if (genres !== selectedGenres || year !== selectedYear) {
       dispatch(addSelectedGenres(genres));
       dispatch(addSelectedYear(year));
-      dispatch(fetchTotalPagesByGenreAndYear({ genres, year }));
+      dispatch(fetchTotalPagesByGenreAndYear({ genres, year, locale }));
     }
 
     if (totalPages) {
