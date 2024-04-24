@@ -75,11 +75,6 @@
     "oracle": "the Oracle's choice",
     "topRated": "Top Rated"
   },
-  "Languages": {
-    "en": "English",
-    "es": "Spanish",
-    "uk": "Ukrainian"
-  },
   "AppBar": {
     "listo": "Listo",
     "nums": "Nums",
@@ -95,5 +90,8 @@
     "about": "About",
     "close": "Close",
     "watch": "Watch trailer"
+  },
+  "Footer": {
+    "author": "Vadym Popov"
   }
 }

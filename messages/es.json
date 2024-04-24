@@ -77,11 +77,6 @@
     "oracle": "Elección del Oráculo",
     "topRated": "Mejor Valoradas"
   },
-  "Languages": {
-    "en": "Inglés",
-    "es": "Español",
-    "uk": "Ucraniano"
-  },
   "AppBar": {
     "listo": "Listado",
     "nums": "Número",
@@ -97,5 +92,8 @@
     "about": "Descripción",
     "close": "Cerrar",
     "watch": "Ver tráiler"
+  },
+  "Footer": {
+    "author": "Vadym Popov"
   }
 }

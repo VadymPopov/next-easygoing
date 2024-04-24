@@ -23,6 +23,14 @@ Are you tired of the classic back-and-forth of "What should we watch tonight?" "
 
 With Netflix&Chill, you can spend less time deciding and more time enjoying your movie night.
 
+## Internationalization Support
+
+EasyGoing now supports internationalization (i18n) to cater to users from various linguistic backgrounds. With the addition of multiple language options, you can enjoy EasyGoing in English, Spanish, or Ukrainian. Here's how to navigate through the different language versions:
+
+1. **English**: The default language of EasyGoing is English.
+2. **Español (Spanish)**: To switch to the Spanish version, simply click on the language selector button and choose "Español."
+3. **Українська (Ukrainian)**: For the Ukrainian version, click on the language selector button and select "Українська."
+
 ## Technologies Used
 
 EasyGoing is built using modern web technologies to ensure a seamless user experience. Here are the key technologies used:
@@ -32,6 +40,7 @@ EasyGoing is built using modern web technologies to ensure a seamless user exper
 - **Tailwind CSS**: EasyGoing utilizes Tailwind CSS for styling, allowing for rapid UI development with utility-first CSS classes.
 - **TypeScript (TS)**: TypeScript is used for static typing and enhanced code readability, providing a more robust development experience.
 - **Redux**: Redux is employed for state management, ensuring a predictable state container for JavaScript apps.
+- **next-intl**: next-intl is integrated into the project to facilitate internationalization and localization efforts.
 - **React Hot Toast**: React Hot Toast is used for displaying notifications to the user, enhancing the user experience.
 - **Next Themes**: Next Themes is used to manage themes and provide a customizable appearance for EasyGoing.
 - **clsx**: clsx is utilized for conditional CSS class generation, enabling dynamic styling based on component state.
